@@ -38,30 +38,7 @@ def _display_label(col_name: str) -> str:
     return col_name
 
 
-def _weekday_to_date(weekday_name: str) -> str:
-    """Convert a weekday name to the most recent date (YYYY-MM-DD).
 
-    If today is that weekday, returns today. Otherwise returns the most
-    recent past occurrence of that weekday.
-    """
-    today = datetime.date.today()
-    target_idx = DAYS_OF_WEEK.index(weekday_name)
-    # Python: Monday=0 ... Sunday=6; our list: Sunday=0 ... Saturday=6
-    # Convert our index to Python's weekday index
-    python_target = (target_idx - 1) % 7  # Sunday->6, Monday->0, etc.
-    current_weekday = today.weekday()
-    days_back = (current_weekday - python_target) % 7
-    result_date = today - datetime.timedelta(days=days_back)
-    return result_date.strftime("%Y-%m-%d")
-
-
-def _date_to_weekday(date_str: str) -> str:
-    """Convert a YYYY-MM-DD date string to a weekday name."""
-    try:
-        d = datetime.date.fromisoformat(date_str)
-        return d.strftime("%A")
-    except (ValueError, TypeError):
-        return DAYS_OF_WEEK[0]
 
 
 class EditDialog:
@@ -98,8 +75,11 @@ class EditDialog:
         self.day_combo = ttk.Combobox(
             frame, values=DAYS_OF_WEEK, state="readonly", width=28
         )
-        current_day = _date_to_weekday(str(row_data.get("Day", "")))
-        self.day_combo.set(current_day)
+        current_day = str(row_data.get("Day", ""))
+        if current_day in DAYS_OF_WEEK:
+            self.day_combo.set(current_day)
+        else:
+            self.day_combo.set(DAYS_OF_WEEK[0])
         self.day_combo.grid(row=1, column=1, sticky="we", pady=4)
 
         # Weight
@@ -150,10 +130,10 @@ class EditDialog:
             )
             return
 
-        date_str = _weekday_to_date(weekday)
-
-        # Recalculate Gain/Loss for this row
-        latest_weight = read_latest_weight_by_name(name, self.table_name)
+        # Recalculate Gain/Loss based on prior record for same Name
+        latest_weight = read_latest_weight_by_name(
+            name, self.table_name, before_id=self.row_id
+        )
         if latest_weight is not None:
             gain_loss = weight - latest_weight
         else:
@@ -161,7 +141,7 @@ class EditDialog:
 
         self.result = {
             "Name": name,
-            "Day": date_str,
+            "Day": weekday,
             "Weight": weight,
             "Gain_Loss": gain_loss,
         }
@@ -401,8 +381,6 @@ class TableGuiApp:
             )
             return
 
-        date_str = _weekday_to_date(weekday)
-
         # Per-user Gain/Loss calculation
         latest_weight = read_latest_weight_by_name(name, self.table_name)
         if latest_weight is not None:
@@ -412,7 +390,7 @@ class TableGuiApp:
 
         payload = {
             "Name": name,
-            "Day": date_str,
+            "Day": weekday,
             "Weight": weight,
             "Gain_Loss": gain_loss,
         }

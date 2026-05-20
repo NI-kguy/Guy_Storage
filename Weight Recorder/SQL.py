@@ -228,9 +228,13 @@ def read_paginated_data(
 
 
 def read_latest_weight_by_name(
-    name: str, table_name: str | None = None
+    name: str, table_name: str | None = None, before_id: int | None = None
 ) -> float | None:
     """Get the most recent weight for a given Name.
+
+    Args:
+        name: The user name to look up.
+        before_id: If provided, only consider rows with id < before_id.
 
     Returns:
         The weight as float, or None if no record exists.
@@ -239,11 +243,18 @@ def read_latest_weight_by_name(
     connection = get_connection()
     try:
         with connection.cursor() as cursor:
-            cursor.execute(
-                f"SELECT `Weight` FROM `{table_name}` "
-                "WHERE `Name` = %s ORDER BY id DESC LIMIT 1",
-                (name,),
-            )
+            if before_id is not None:
+                cursor.execute(
+                    f"SELECT `Weight` FROM `{table_name}` "
+                    "WHERE `Name` = %s AND `id` < %s ORDER BY id DESC LIMIT 1",
+                    (name, before_id),
+                )
+            else:
+                cursor.execute(
+                    f"SELECT `Weight` FROM `{table_name}` "
+                    "WHERE `Name` = %s ORDER BY id DESC LIMIT 1",
+                    (name,),
+                )
             row = cursor.fetchone()
             if row:
                 return float(row["Weight"])
@@ -267,13 +278,13 @@ def read_distinct_names(table_name: str | None = None) -> list[str]:
 
 
 def read_graph_data(table_name: str | None = None) -> list[dict]:
-    """Read Day, Weight, Gain_Loss for graphing (all users, oldest first)."""
+    """Read created_at, Weight, Gain_Loss for graphing (all users, oldest first)."""
     table_name = _cfg("table_name", table_name)
     connection = get_connection()
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f"SELECT `Day`, `Weight`, `Gain_Loss` FROM `{table_name}` "
+                f"SELECT `created_at`, `Weight`, `Gain_Loss` FROM `{table_name}` "
                 "ORDER BY id ASC"
             )
             return cursor.fetchall()
@@ -284,13 +295,13 @@ def read_graph_data(table_name: str | None = None) -> list[dict]:
 def read_graph_data_by_name(
     name: str, table_name: str | None = None
 ) -> list[dict]:
-    """Read Day, Weight, Gain_Loss for a specific Name (oldest first)."""
+    """Read created_at, Weight, Gain_Loss for a specific Name (oldest first)."""
     table_name = _cfg("table_name", table_name)
     connection = get_connection()
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f"SELECT `Day`, `Weight`, `Gain_Loss` FROM `{table_name}` "
+                f"SELECT `created_at`, `Weight`, `Gain_Loss` FROM `{table_name}` "
                 "WHERE `Name` = %s ORDER BY id ASC",
                 (name,),
             )

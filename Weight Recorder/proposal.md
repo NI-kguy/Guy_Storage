@@ -52,11 +52,11 @@ Update `insert_row()` to call this function with the entered Name.
 
 ---
 
-### 2. Day Field — Weekday Selector (Stores Full Date)
+### 2. Day Field — Weekday Selector
 
 **Problem:** Users currently type the date manually, which is error-prone and inconsistent.
 
-**Solution:** Replace the free-text Day entry with a read-only `ttk.Combobox` showing weekday names, but **store the full date (`YYYY-MM-DD`)** internally.
+**Solution:** Replace the free-text Day entry with a read-only `ttk.Combobox` showing weekday names, and **store the weekday name directly** (e.g., "Monday").
 
 ```python
 DAYS_OF_WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -65,16 +65,14 @@ DAYS_OF_WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 **Behavior:**
 - The combobox displays weekday names (Sunday–Saturday) — read-only, users cannot type arbitrary text.
 - Default selection: today's weekday (auto-detected via `datetime.date.today().strftime("%A")`).
-- On insert, the selected weekday maps to the **actual date** of that weekday in the current week:
-  - If user selects "Monday" on a Monday → stores `2026-05-19`.
-  - If user selects "Saturday" on a Monday → stores the most recent Saturday (`2026-05-17`).
-- The `Day` column stores `YYYY-MM-DD` strings (existing `VARCHAR(50)` — no schema change needed).
-- The table view displays the full date. The graph uses the full date for chronological X-axis ordering.
-- Edit dialog also uses a weekday combobox, pre-selected to match the stored date's weekday.
+- On insert, the selected weekday name is stored as-is (e.g., "Monday", "Tuesday").
+- The `Day` column stores weekday name strings (existing `VARCHAR(50)` — no schema change needed).
+- The table view and graph display the weekday name. The graph uses insertion order (`id`) for X-axis ordering.
+- Edit dialog also uses a weekday combobox, pre-selected to match the stored weekday name.
 
 **Legacy data migration:**
-- Existing records with date strings (e.g., `"2026-04-10"`) remain valid and display correctly.
-- No migration step required — both old date strings and new date strings are in the same format.
+- Existing records with old free-text day values remain in the database and display as-is.
+- No migration step required.
 
 ---
 
@@ -121,7 +119,7 @@ def update_data(row_id: int, updates: dict, table_name: str | None = None) -> in
 1. On graph window open, populate combobox with distinct Names from the database.
 2. User selects a Name → graph redraws showing only that user's data.
 3. "All" option shows combined data (current behavior).
-4. X-axis uses the `Day` column (full date `YYYY-MM-DD`) for chronological ordering.
+4. X-axis uses insertion order (`id`) for ordering; labels show the weekday name from the `Day` column.
 
 **New SQL functions:**
 
@@ -221,13 +219,13 @@ def read_paginated_data(
 │  │         ___/\___                                   │  │
 │  │   _____/        \____                              │  │
 │  │  /                                                 │  │
-│  │  2026-05-12  05-14  05-16  05-18  05-19            │  │
+│  │  Mon    Tue    Wed    Thu    Fri                     │  │
 │  └────────────────────────────────────────────────────┘  │
 │  ┌─ Gain/Loss (kg) ──────────────────────────────────┐  │
 │  │       _                                            │  │
 │  │  ____/ \    /\                                     │  │
 │  │         \__/  \___                                 │  │
-│  │  2026-05-12  05-14  05-16  05-18  05-19            │  │
+│  │  Mon    Tue    Wed    Thu    Fri                     │  │
 │  └────────────────────────────────────────────────────┘  │
 │                                                          │
 │  Status: Showing 15 row(s) for Kevin.                    │
@@ -242,12 +240,12 @@ def read_paginated_data(
 |------|---------|-------------|
 | 1 | `.env`, `.env.example`, `.gitignore` | Move credentials out of source code |
 | 2 | `SQL.py` | Replace `db_config` import with `python-dotenv`; add `read_latest_weight_by_name`, `update_data`, `read_distinct_names`, `read_graph_data_by_name`, `read_paginated_data` |
-| 3 | `gui.py` | Replace Day text entry with weekday combobox that stores full `YYYY-MM-DD` date |
+| 3 | `gui.py` | Replace Day text entry with weekday combobox that stores the weekday name directly |
 | 4 | `gui.py` | Fix `insert_row` to use per-Name gain/loss calculation |
 | 5 | `gui.py` | Add "Delete Selected" button with confirmation dialog |
 | 6 | `gui.py` | Add pagination (Previous/Next buttons, 20 rows per page) |
 | 7 | `gui.py` | Add double-click edit dialog (modal Toplevel with weekday combobox + pre-filled form) |
-| 8 | `graph_gui.py` | Add Name combobox filter; use full date for X-axis labels |
+| 8 | `graph_gui.py` | Add Name combobox filter; use weekday names for X-axis labels |
 | 9 | Tests | Add `tests/test_sql.py` covering new SQL functions |
 
 ---
@@ -266,7 +264,7 @@ def read_paginated_data(
 
 | Decision | Rationale |
 |----------|-----------|
-| Store full date, display weekday in combobox | Preserves chronological ordering for graphs while giving users a simple selector |
+| Store weekday name directly | Simple and intuitive — what users select is what gets stored; graph uses insertion order for chronological display |
 | No cascading Gain/Loss recalculation | Keeps edits/deletes simple and predictable; avoids multi-row UPDATE side effects |
 | Gain/Loss calculated at insertion time only | Clear semantics — users understand the value reflects the delta from their prior entry |
 | Pagination (20 rows/page) | Keeps queries fast; users can browse all data without loading everything at once |
@@ -277,5 +275,5 @@ def read_paginated_data(
 ## Known Limitations
 
 1. Editing or deleting a row does NOT recalculate Gain/Loss on subsequent rows for that user.
-2. If a user inserts data for a past weekday (e.g., selects "Saturday" on Monday), the Gain/Loss compares against the last inserted record by `id`, not by date order.
+2. The Day column stores only the weekday name, not a full date. Chronological ordering relies on insertion order (`id`).
 3. SQL table/column names are interpolated via f-strings — safe only because they come from hardcoded `TABLE_CONFIG`. New functions must maintain this convention.

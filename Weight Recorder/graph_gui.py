@@ -167,21 +167,27 @@ class GraphGuiApp:
             )
             return
 
-        days = [str(r.get("Day", "")) for r in self.rows]
+        dates = []
+        for r in self.rows:
+            created = r.get("created_at", "")
+            if hasattr(created, "strftime"):
+                dates.append(created.strftime("%Y-%m-%d"))
+            else:
+                dates.append(str(created))
         weights = [self._to_float(r.get("Weight")) for r in self.rows]
         gains = [self._to_float(r.get("Gain_Loss")) for r in self.rows]
 
         self._draw_single_graph(
             canvas=self.weight_canvas,
             title="Weight (kg)",
-            x_labels=days,
+            x_labels=dates,
             values=weights,
             color="#1e6ad3",
         )
         self._draw_single_graph(
             canvas=self.gain_canvas,
             title="Gain/Loss (kg)",
-            x_labels=days,
+            x_labels=dates,
             values=gains,
             color="#2e9d55",
         )
