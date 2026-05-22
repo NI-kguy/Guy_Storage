@@ -25,13 +25,42 @@ def _cfg(key: str, override=None):
     return TABLE_CONFIG[key] if override is None else override
 
 
+def _is_default_local(value: str | None) -> bool:
+    """Return True when value is empty or points to local defaults."""
+    if not value:
+        return True
+    return value.strip().lower() in {"localhost", "127.0.0.1"}
+
+
 def load_runtime_config() -> None:
     """Load .env file into environment variables (executed only once)."""
     global _CONFIG_LOADED
     if _CONFIG_LOADED:
         return
+
     env_path = Path(__file__).resolve().parent / ".env"
     load_dotenv(env_path)
+
+    # Fallback for packaged runs where .env may be missing.
+    # Importing the module ensures PyInstaller can bundle it.
+    try:
+        import db_config as cfg  # type: ignore
+
+        cfg_host = getattr(cfg, "DB_HOST", None)
+        if _is_default_local(os.getenv("DB_HOST")) and cfg_host:
+            os.environ["DB_HOST"] = str(cfg_host)
+
+        cfg_port = getattr(cfg, "DB_PORT", None)
+        if os.getenv("DB_PORT") in (None, "", "3306") and cfg_port is not None:
+            os.environ["DB_PORT"] = str(cfg_port)
+
+        for key in ("DB_USER", "DB_PASSWORD", "DB_NAME", "DB_TIMEOUT"):
+            value = getattr(cfg, key, None)
+            if value is not None and not os.getenv(key):
+                os.environ[key] = str(value)
+    except ModuleNotFoundError:
+        pass
+
     _CONFIG_LOADED = True
 
 

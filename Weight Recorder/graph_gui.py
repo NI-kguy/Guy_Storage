@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 
+from pymysql.err import OperationalError
+
 from SQL import (
     TABLE_CONFIG,
     create_table,
@@ -296,7 +298,20 @@ class GraphGuiApp:
 
 def main() -> None:
     load_runtime_config()
-    create_table()
+    try:
+        create_table()
+    except OperationalError as err:
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showerror(
+            "Database Connection Error",
+            "Unable to connect to MySQL.\n\n"
+            "Check that your DB service is running and DB settings are "
+            "correct (.env or db_config.py).\n\n"
+            f"Details: {err}",
+        )
+        root.destroy()
+        return
 
     root = tk.Tk()
     GraphGuiApp(root)
