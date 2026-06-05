@@ -1,0 +1,6 @@
+.env
+db_config.py
+__pycache__/
+*.pyc
+*.pyo
+*.spec
