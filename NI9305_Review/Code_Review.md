@@ -43,4 +43,43 @@ Reference: [te-standard-data-types](https://dev.azure.com/ni/DevCentral/_git/te-
 
 ---
 
+## Review #3 — Digital PFI0
+
+### Status: All good
+
+No issues found with the Digital PFI0 configuration.
+
+> **Note:** Double confirm the PWM threshold value with the HW engineer.
+
+---
+
+## Review #4 — Initial Accuracy and Range Test
+
+![Initial Accuracy and Range Test](./Review4_Initial.PNG)
+
+### Flow Description
+
+The VI acquires DMM and DUT measurements: it sets the PS voltage, waits for a delay, then triggers the NI9305 ADC acquisition. Afterwards, it performs a sanity check on the DMM reading and converts the DUT ADC output to millivolts using the nominal LSB weight.
+
+### Current — Sanity Check Must Run Before the Actual Test
+
+The sanity check (comparing the DMM measured voltage against the expected percentage range) currently runs **after** the NI9305 acquisition. Its error output (`Stimulus check failed!`) is not wired into the error line that feeds into the acquisition block.
+
+**Recommendation:** Connect the sanity check error wire **upstream** of the NI9305 ADC acquisition node. This ensures the test aborts immediately if the stimulus is out of range, rather than proceeding with a bad measurement. All error terminals in this section should be chained in sequence — no dangling or parallel error lines.
+
+
+---
+
+## Review #5 — Initial Accuracy and Range Test (SDI)
+
+![Initial Accuracy and Range Test - SDI](./Review_5_Initial2.PNG)
+
+### Recommendation
+
+1. **DMM Measurement label** — Rename the SDI label from `DMM Measurement` to `DMM Measurement (Sanity Check)` to make its purpose explicit at a glance.
+
+2. **Add test limits** — Add a test limit to the DMM Measurement (Sanity Check) SDI entry so the sanity check has a defined pass/fail boundary, rather than relying solely on the percentage check in the block diagram.
+
+---
+
 <!-- Add next review below this line -->
