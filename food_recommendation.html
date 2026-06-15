@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Guide – Penang Queenbay</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* ── NAV BAR ── */
+    nav {
+      background-color: #2c2c2c;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav .brand {
+      color: #f0c040;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+    }
+
+    nav ul li a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #f0c040;
+      color: #2c2c2c;
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #2c2c2c 0%, #444 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      color: #f0c040;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* ── RESTAURANT CARD ── */
+    .restaurant-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+      scroll-margin-top: 80px;
+    }
+
+    .card-header {
+      padding: 24px 28px 16px;
+      border-left: 6px solid #f0c040;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .card-header .emoji {
+      font-size: 2.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .card-header .title-block h2 {
+      font-size: 1.5rem;
+      color: #2c2c2c;
+    }
+
+    .card-header .title-block .tags {
+      margin-top: 6px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f0c040;
+      color: #2c2c2c;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .tag.cuisine { background: #f0c040; }
+    .tag.price   { background: #d0eaff; color: #1a5276; }
+
+    .card-body {
+      padding: 16px 28px 28px;
+    }
+
+    .card-body p {
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 18px;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c2c2c;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── FOOD RECOMMENDATION TABLE ── */
+    .food-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .food-table thead th {
+      background-color: #2c2c2c;
+      color: #f0c040;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .food-table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .food-table tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #eee;
+      color: #444;
+    }
+
+    .food-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ── INTRO DETAIL SECTION ── */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .intro-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 4px; }
+      nav ul li a { padding: 6px 10px; font-size: 0.82rem; }
+    }
+
+    .intro-box {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .intro-box h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #2c2c2c;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #f0c040;
+      padding-bottom: 4px;
+      display: inline-block;
+    }
+
+    .intro-box p, .intro-box ul {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .intro-box ul {
+      padding-left: 18px;
+    }
+
+    .intro-box ul li {
+      margin-bottom: 4px;
+    }
+
+    .detail-lead {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: linear-gradient(135deg, #fffbea, #fff);
+      border-left: 4px solid #f0c040;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .detail-lead strong { color: #2c2c2c; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2c2c2c;
+      color: #888;
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="brand">&#127869; Queenbay Food Guide</span>
+    <ul>
+      <li><a href="#robataya">Robataya Izakaya</a></li>
+      <li><a href="#madam-kwan">Madam Kwan's</a></li>
+      <li><a href="#dandy">Dandy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Restaurant Guide</h1>
+    <p>Penang Queenbay &mdash; Food Recommendations &amp; Average Prices</p>
+  </div>
+
+  <!-- CONTENT -->
+  <main>
+
+    <!-- ROBATAYA IZAKAYA -->
+    <section class="restaurant-card" id="robataya">
+      <div class="card-header">
+        <div class="emoji">&#127843;</div>
+        <div class="title-block">
+          <h2>Robataya Izakaya</h2>
+          <div class="tags">
+            <span class="tag cuisine">Japanese Food</span>
+            <span class="tag price">Avg: RM 30 – RM 80 / pax</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <!-- LEAD INTRO -->
+        <p class="detail-lead">
+          <strong>Robataya Izakaya</strong> is a Japanese casual dining restaurant that brings together
+          two beloved Japanese traditions — <strong>Robatayaki</strong> (炉端焼き, charcoal fireside cooking)
+          and <strong>Izakaya</strong> (居酒屋, a relaxed Japanese pub). Located in Penang's Queenbay area,
+          it offers an authentic Japanese dining experience where food is grilled slowly over
+          <em>binchōtan</em> charcoal and shared among diners in a warm, communal atmosphere —
+          evoking the spirit of a traditional Japanese gathering around the hearth.
+        </p>
+
+        <!-- INTRO GRID -->
+        <div class="intro-grid">
+
+          <div class="intro-box">
+            <h4>&#128293; What is Robatayaki?</h4>
+            <p>
+              <strong>Robatayaki</strong> (炉端焼き) literally means <em>"fireside cooking"</em>.
+              This centuries-old method originates from the fishermen of <strong>Hokkaido</strong>,
+              Japan's northernmost island, who cooked over a communal open hearth called an
+              <em>irori</em> on their boats using <em>binchōtan</em> (white charcoal) encased in
+              stone boxes. The technique uses a wide, flat open fireplace, cooking food at
+              varying speeds to lock in natural flavours. By 1965, there were over
+              <strong>10,000 robata restaurants</strong> across Japan.
+            </p>
+          </div>
+
+          <div class="intro-box">
+            <h4>&#127866; What is an Izakaya?</h4>
+            <p>
+              An <strong>Izakaya</strong> (居酒屋) is a type of informal Japanese bar and
+              dining establishment — the word literally translates to <em>"sit-down sake shop"</em>.
+              Dating back to Japan's Edo period (1603–1867), izakayas are the Japanese equivalent
+              of a pub or tavern, where people relax after work over food and drinks.
+              Dishes are shared tapas-style, ordered gradually throughout the session.
+              Diners receive a warm <em>oshibori</em> (towel) and a small starter
+              (<em>otōshi</em>) upon arrival.
+            </p>
+          </div>
+
+          <div class="intro-box">
+            <h4>&#127968; Dining Experience</h4>
+            <ul>
+              <li>Guests are seated around a <strong>central open charcoal grill</strong></li>
+              <li>Fresh ingredients are displayed — point to order what you want grilled</li>
+              <li>Food is served progressively: light starters → grilled mains → rice/noodles</li>
+              <li>Dishes are <strong>shared</strong> among the table, similar to Spanish tapas</li>
+              <li><em>Nomi-hōdai</em> (all-you-can-drink) options may be available</li>
+              <li>Ideal for group dinners, celebrations, and after-work gatherings</li>
+            </ul>
+          </div>
+
+          <div class="intro-box">
+            <h4>&#127775; Atmosphere &amp; Highlights</h4>
+            <ul>
+              <li>Warm, rustic Japanese interior inspired by traditional <em>irori</em> hearths</li>
+              <li>Smoky, aromatic ambiance from live charcoal grilling</li>
+              <li>Authentic <strong>binchōtan charcoal</strong> for clean, intense heat</li>
+              <li>Japanese beverages: sake, shōchū, beer, chuhai cocktails</li>
+              <li>Relaxed, unhurried pace — great for long, leisurely meals</li>
+              <li>Suitable for both couples and larger groups</li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- END INTRO GRID -->
+
+        <h3>Food Recommendations</h3>
+        <table class="food-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dish</th>
+              <th>Description</th>
+              <th>Est. Price (RM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Grilled Seafood Skewers</td>
+              <td>Prawns, squid, and fish grilled over charcoal</td>
+              <td>12 – 22</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Yakitori</td>
+              <td>Tender chicken skewers glazed with tare sauce</td>
+              <td>8 – 15</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Edamame</td>
+              <td>Salted steamed soybeans — classic izakaya starter</td>
+              <td>6 – 10</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Grilled Corn (Toukmorokoshi)</td>
+              <td>Charcoal-grilled corn with soy butter glaze</td>
+              <td>8 – 12</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Japanese Sake / Beer</td>
+              <td>Pairs perfectly with grilled dishes</td>
+              <td>15 – 35</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MADAM KWAN'S -->
+    <section class="restaurant-card" id="madam-kwan">
+      <div class="card-header">
+        <div class="emoji">&#127871;</div>
+        <div class="title-block">
+          <h2>Madam Kwan's</h2>
+          <div class="tags">
+            <span class="tag cuisine">Malaysian Food</span>
+            <span class="tag price">Avg: RM 25 – RM 60 / pax</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>
+          A well-established Malaysian restaurant chain celebrated for its
+          <strong>authentic local cuisine</strong> in a comfortable, casual setting.
+          Known for its signature <em>Nasi Bojari</em> (a grand mixed-rice platter)
+          and traditional Malay-Chinese fusion dishes. A favourite among both locals
+          and tourists looking for a true taste of Malaysia.
+        </p>
+        <h3>Food Recommendations</h3>
+        <table class="food-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dish</th>
+              <th>Description</th>
+              <th>Est. Price (RM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Nasi Bojari</td>
+              <td>Signature mixed rice with an array of side dishes — must try!</td>
+              <td>28 – 38</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Nasi Lemak</td>
+              <td>Coconut-infused rice with sambal, ikan bilis, egg, and peanuts</td>
+              <td>18 – 28</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Char Kway Teow</td>
+              <td>Stir-fried flat rice noodles with prawns, egg, and bean sprouts</td>
+              <td>16 – 22</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Laksa</td>
+              <td>Spicy noodle soup with rich coconut or tamarind-based broth</td>
+              <td>15 – 20</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Satay</td>
+              <td>Grilled meat skewers served with peanut sauce and ketupat</td>
+              <td>12 – 18</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- DANDY -->
+    <section class="restaurant-card" id="dandy">
+      <div class="card-header">
+        <div class="emoji">&#9749;</div>
+        <div class="title-block">
+          <h2>Dandy</h2>
+          <div class="tags">
+            <span class="tag cuisine">Western / Modern Casual</span>
+            <span class="tag price">Avg: RM 20 – RM 50 / pax</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>
+          A stylish modern casual dining restaurant with a relaxed, café-like ambiance.
+          Popular among younger diners, Dandy offers a creative menu of
+          <strong>Western comfort food</strong> with some local influences — think hearty
+          burgers, artisan pastas, all-day brunch, and indulgent desserts. Great for
+          casual hangouts and weekend brunches.
+        </p>
+        <h3>Food Recommendations</h3>
+        <table class="food-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dish</th>
+              <th>Description</th>
+              <th>Est. Price (RM)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Signature Burger</td>
+              <td>Juicy beef patty with house sauce, lettuce, and crispy fries</td>
+              <td>22 – 32</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Creamy Pasta</td>
+              <td>Al dente pasta in a rich cream or tomato-based sauce</td>
+              <td>18 – 28</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>All-Day Breakfast</td>
+              <td>Eggs, toast, sausage, mushrooms — served any time of day</td>
+              <td>18 – 25</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Artisan Sandwich</td>
+              <td>Toasted sourdough with gourmet fillings</td>
+              <td>15 – 22</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Desserts / Cakes</td>
+              <td>Seasonal cakes and sweet treats to finish your meal</td>
+              <td>10 – 18</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Penang Queenbay Restaurant Guide &mdash; Prices are estimates and may vary. Last updated: June 2026.</p>
+  </footer>
+
+  <script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

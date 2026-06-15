@@ -1,0 +1,1559 @@
+*********************************
+Date   : Sun Jun 14 22:46:55 2026
+Error Number: (36000)
+Message: A GeneralException occurred
+Version: 11.5.1.2266 (Dec 24 2009, Build=2266)
+OS Version: Professional  (Build 9200)
+Command line arguments: -clone,mode=pload,src=\\sunway\MfgTest\Images\Released\543805B-040\543805B-040.gho:1,dst=1:4 -fdsp -sure -batch -noib -ntc- -afile=C:\Mounts\System\Multi-Image\Logs\Ghost\20260614_224645_GHOSTERR.txt -prefos
+Active Switches :
+       AutoName
+PathName            : 655 mpcache-A0E75E8036D99DE0989ABC29E1D67B49230259B0.bin
+DumpFile            : \\sunway\MfgTest\Images\Released\543805B-040\543805B-040.gho
+DumpPos             : 220929762
+Last LFO Buffersize : 65536
+Last LFO Path       : 
+  Full Path         : \\sunway\MfgTest\Images\Released\543805B-040\543805B-040.gho
+  Drive Letter      : \\sunway\MfgTest\ 
+Last LFO Filesystem : Native
+FlagImplode         : 0
+FlagExplode         : 3
+
+CloneSrc            : \\sunway\MfgTest\Images\Released\543805B-040\543805B-040.gho
+BatchPartSrc        : 1
+BatchPartMSrc       : 
+
+CloneDst            : 1
+BatchPartDst        : 4
+
+Operation Details :
+  Total size.........67695
+  MB copied..........1145
+  MB remaining.......66550
+  Percent complete...1%
+  Speed..............7633 MB/min
+  Time elapsed.......0:09   
+  Time remaining.....8:43   
+
+Program was unexpectedly terminated
+Generated at ..\TerminateHandlerAbort.cpp:95
+
+Thread #7596 Call Stack
+TerminateHandlerAbort::ourHandler
+BlockDeviceNtVolume::Imp::write
+StandardCache::StandardCache::cacheToDisk
+StandardCache::StandardCache::flushLruEntries
+StandardCache::StandardCache::flush
+CopyPartition
+CopyFileToPart
+CopyMainline
+AttemptOperation
+sub_main
+main
+
+Call Stack
+Address            Frame              Logical Addr              Module
+0x00000000777e2b8c 0x000000000019c858 NtGetContextThread+0x000000000000000c
+0x000000000019cb58 0x0000000000000003 0x0000:0x0000000000000000 
+End Call Stack
+
+
+Start heap available: 4217294848
+Cur   heap available: 4095275008
+Total Memory:         3966554112
+
+Allocated
+  33500 ..\ghost.cpp:1511
+Free
+
+Fat details:
+  SRC:
+  FatType..........32
+  firstSector.......2048
+  ClusterSize......1024
+  clusters.........98304
+  root_next_avail..0
+  data_next_avail..0
+  dir_sector.......0
+  root_sector......8192
+  data_sector......8192
+  FAT_sector.......0
+
+NTFS details:
+----------------
+
+NTFS Global Flags:
+----------------
+	 contiguousWrite=0 forceDiskClusterMapping=0 
+	 inhibitCHKDSK=1 ignoreBadLog=0 ignoreCHKDSKBit=0
+	 enable_cache=0 xfrbuflen=32768 
+	 last_attr_type = 0 
+	 loadExact = 0 
+	 sameSize = 0 
+----------------
+	=======================================================
+	NTFS volume 0:
+	----------------
+	initialised..............1
+	read cached..............N
+	Selective caching........N
+	flags....................Volume OK
+	drive....................0x00
+	part order...............3
+	version..................0x0400
+	volsize..................409599999
+	blocksize................512
+	clusterfactor............8
+	clustersize..............4096
+	mftrecordsize............1024
+	indexrecordsize..........4096
+	indexclustperrecord......1
+	bootSectorCopyOffset.....409599999
+	pagefileSys..............-1
+	bootIni..................-1
+	volumeLabel..............[WIP-543805]
+	sectorsInUse.............150174480
+	totalNonCopiedBytes......0
+	bytesToCopy..............0
+	bitmapClusters...........704
+	bitmapUsedBytes..........2880000
+	estimatedClusters........704
+	estimatedUsedBytes.......2880000
+	clustersizeShift.........12
+	blocksizeShift...........9
+	mftrecordsizeShift.......10
+	indexrecordsizeShift.....12
+	totalRootMftRecs.........1007718
+	clustermap failover......N
+	Boot sector details
+		name....................[NTFS    ]
+		blocksize...............512
+		clusterfactor...........8
+		reservedSectorsUnused...0
+		mediaType...............0xf8
+		secPerTrack.............63
+		numHeads................255
+		hiddenSectors...........71919616
+		volsize.................409599999
+		mftcluster..............786432
+		mftmirrorcluster........25599999
+		clustersPerMFTRecord....246
+		clustersPerIndexBuffer..1
+
+		---------------------------------------------------
+		Cluster Allocation Map
+		---------------------------------------------------
+		Start: 0 Length: 12 Next: 12
+							Gap: 1
+		Start: 13 Length: 1 Next: 14
+							Gap: 6623
+		Start: 6637 Length: 256 Next: 6893
+							Gap: 2917
+		Start: 9810 Length: 1 Next: 9811
+							Gap: 828
+		Start: 10639 Length: 64 Next: 10703
+							Gap: 6631
+		Start: 17334 Length: 1280 Next: 18614
+							Gap: 855
+		Start: 19469 Length: 1 Next: 19470
+							Gap: 104
+		Start: 19574 Length: 1 Next: 19575
+							Gap: 642
+		Start: 20217 Length: 16 Next: 20233
+							Gap: 173
+		Start: 20406 Length: 256 Next: 20662
+							Gap: 420
+		Start: 21082 Length: 1 Next: 21083
+							Gap: 91
+		Start: 21174 Length: 16 Next: 21190
+							Gap: 2832
+		Start: 24022 Length: 274 Next: 24296
+							Gap: 1270
+		Start: 25566 Length: 1 Next: 25567
+							Gap: 310
+		Start: 25877 Length: 1 Next: 25878
+							Gap: 136
+		Start: 26014 Length: 13 Next: 26027
+							Gap: 596
+		Start: 26623 Length: 121 Next: 26744
+							Gap: 4
+		Start: 26748 Length: 1 Next: 26749
+							Gap: 71
+		Start: 26820 Length: 18 Next: 26838
+							Gap: 2048
+		Start: 28886 Length: 1 Next: 28887
+							Gap: 7956
+		Start: 36843 Length: 1 Next: 36844
+							Gap: 3037
+		Start: 39881 Length: 16 Next: 39897
+							Gap: 5939
+		Start: 45836 Length: 2 Next: 45838
+							Gap: 24622
+		Start: 70460 Length: 4 Next: 70464
+							Gap: 2366
+		Start: 72830 Length: 1 Next: 72831
+							Gap: 4217
+		Start: 77048 Length: 8 Next: 77056
+							Gap: 18
+		Start: 77074 Length: 64 Next: 77138
+							Gap: 8349
+		Start: 85487 Length: 16 Next: 85503
+							Gap: 30478
+		Start: 115981 Length: 1 Next: 115982
+							Gap: 2661
+		Start: 118643 Length: 6 Next: 118649
+							Gap: 3122
+		Start: 121771 Length: 4 Next: 121775
+							Gap: 139
+		Start: 121914 Length: 4 Next: 121918
+							Gap: 2605
+		Start: 124523 Length: 240 Next: 124763
+							Gap: 587
+		Start: 125350 Length: 7 Next: 125357
+							Gap: 22772
+		Start: 148129 Length: 16 Next: 148145
+							Gap: 2530
+		Start: 150675 Length: 1 Next: 150676
+							Gap: 5900
+		Start: 156576 Length: 3 Next: 156579
+							Gap: 115464
+		Start: 272043 Length: 3 Next: 272046
+							Gap: 40534
+		Start: 312580 Length: 8 Next: 312588
+							Gap: 68468
+		Start: 381056 Length: 4 Next: 381060
+							Gap: 6176
+		Start: 387236 Length: 4 Next: 387240
+							Gap: 1026
+		Start: 388266 Length: 16 Next: 388282
+							Gap: 930
+		Start: 389212 Length: 8 Next: 389220
+							Gap: 53
+		Start: 389273 Length: 16 Next: 389289
+							Gap: 5906
+		Start: 395195 Length: 8 Next: 395203
+							Gap: 44001
+		Start: 439204 Length: 1 Next: 439205
+							Gap: 101806
+		Start: 541011 Length: 36 Next: 541047
+							Gap: 38957
+		Start: 580004 Length: 18 Next: 580022
+							Gap: 32370
+		Start: 612392 Length: 5 Next: 612397
+							Gap: 10783
+		Start: 623180 Length: 128 Next: 623308
+							Gap: 530
+		Start: 623838 Length: 64 Next: 623902
+							Gap: 17985
+		Start: 641887 Length: 256 Next: 642143
+							Gap: 17991
+		Start: 660134 Length: 1 Next: 660135
+							Gap: 9890
+		Start: 670025 Length: 256 Next: 670281
+							Gap: 15837
+		Start: 686118 Length: 256 Next: 686374
+							Gap: 4766
+		Start: 691140 Length: 94 Next: 691234
+							Gap: 594
+		Start: 691828 Length: 1 Next: 691829
+							Gap: 973
+		Start: 692802 Length: 2 Next: 692804
+							Gap: 17224
+		Start: 710028 Length: 256 Next: 710284
+							Gap: 15801
+		Start: 726085 Length: 96 Next: 726181
+							Gap: 9475
+		Start: 735656 Length: 64 Next: 735720
+							Gap: 17092
+		Start: 752812 Length: 17 Next: 752829
+							Gap: 11596
+		Start: 764425 Length: 32 Next: 764457
+							Gap: 21975
+		Start: 786432 Length: 92224 Next: 878656
+							Gap: 2420
+		Start: 881076 Length: 1 Next: 881077
+							Gap: 860
+		Start: 881937 Length: 1 Next: 881938
+							Gap: 7384
+		Start: 889322 Length: 1 Next: 889323
+							Gap: 69747
+		Start: 959070 Length: 32 Next: 959102
+							Gap: 2224
+		Start: 961326 Length: 1 Next: 961327
+							Gap: 390
+		Start: 961717 Length: 16 Next: 961733
+							Gap: 4530
+		Start: 966263 Length: 1 Next: 966264
+							Gap: 63
+		Start: 966327 Length: 1 Next: 966328
+							Gap: 38982
+		Start: 1005310 Length: 1 Next: 1005311
+							Gap: 21684
+		Start: 1026995 Length: 1 Next: 1026996
+							Gap: 46660
+		Start: 1073656 Length: 64 Next: 1073720
+							Gap: 65679
+		Start: 1139399 Length: 1 Next: 1139400
+							Gap: 36964
+		Start: 1176364 Length: 1 Next: 1176365
+							Gap: 15869
+		Start: 1192234 Length: 4 Next: 1192238
+							Gap: 23697
+		Start: 1215935 Length: 10 Next: 1215945
+							Gap: 46691
+		Start: 1262636 Length: 1 Next: 1262637
+							Gap: 79964
+		Start: 1342601 Length: 1 Next: 1342602
+							Gap: 7168
+		Start: 1349770 Length: 4 Next: 1349774
+							Gap: 91399
+		Start: 1441173 Length: 1 Next: 1441174
+							Gap: 30256
+		Start: 1471430 Length: 64 Next: 1471494
+							Gap: 1018
+		Start: 1472512 Length: 180 Next: 1472692
+							Gap: 1729
+		Start: 1474421 Length: 3 Next: 1474424
+							Gap: 16004
+		Start: 1490428 Length: 1 Next: 1490429
+							Gap: 70291
+		Start: 1560720 Length: 1 Next: 1560721
+							Gap: 19070
+		Start: 1579791 Length: 3 Next: 1579794
+							Gap: 9168
+		Start: 1588962 Length: 1 Next: 1588963
+							Gap: 3080
+		Start: 1592043 Length: 1 Next: 1592044
+							Gap: 37291
+		Start: 1629335 Length: 1 Next: 1629336
+							Gap: 2084
+		Start: 1631420 Length: 36 Next: 1631456
+							Gap: 39696
+		Start: 1671152 Length: 3 Next: 1671155
+							Gap: 72607
+		Start: 1743762 Length: 1 Next: 1743763
+							Gap: 43284
+		Start: 1787047 Length: 5 Next: 1787052
+							Gap: 99552
+		Start: 1886604 Length: 1 Next: 1886605
+							Gap: 27058
+		Start: 1913663 Length: 1 Next: 1913664
+							Gap: 1281
+		Start: 1914945 Length: 885 Next: 1915830
+							Gap: 55243
+		Start: 1971073 Length: 1 Next: 1971074
+							Gap: 3198
+		Start: 1974272 Length: 2 Next: 1974274
+							Gap: 1
+		Start: 1974275 Length: 1 Next: 1974276
+							Gap: 1404
+		Start: 1975680 Length: 1 Next: 1975681
+							Gap: 4582
+		Start: 1980263 Length: 4 Next: 1980267
+							Gap: 6549
+		Start: 1986816 Length: 1 Next: 1986817
+							Gap: 1045
+		Start: 1987862 Length: 1 Next: 1987863
+							Gap: 4510
+		Start: 1992373 Length: 1 Next: 1992374
+							Gap: 3802
+		Start: 1996176 Length: 3 Next: 1996179
+							Gap: 2783
+		Start: 1998962 Length: 1 Next: 1998963
+							Gap: 32722
+		Start: 2031685 Length: 2 Next: 2031687
+							Gap: 2928
+		Start: 2034615 Length: 1 Next: 2034616
+							Gap: 49489
+		Start: 2084105 Length: 1 Next: 2084106
+							Gap: 33610
+		Start: 2117716 Length: 1 Next: 2117717
+							Gap: 15972
+		Start: 2133689 Length: 51 Next: 2133740
+							Gap: 21962
+		Start: 2155702 Length: 36 Next: 2155738
+							Gap: 11757
+		Start: 2167495 Length: 48 Next: 2167543
+							Gap: 4165
+		Start: 2171708 Length: 1 Next: 2171709
+							Gap: 41803
+		Start: 2213512 Length: 4 Next: 2213516
+							Gap: 3595
+		Start: 2217111 Length: 4107 Next: 2221218
+							Gap: 44286
+		Start: 2265504 Length: 32 Next: 2265536
+							Gap: 3112
+		Start: 2268648 Length: 130 Next: 2268778
+							Gap: 22160
+		Start: 2290938 Length: 1 Next: 2290939
+							Gap: 66170
+		Start: 2357109 Length: 48 Next: 2357157
+							Gap: 124500
+		Start: 2481657 Length: 1 Next: 2481658
+							Gap: 249714
+		Start: 2731372 Length: 1253 Next: 2732625
+							Gap: 305593
+		Start: 3038218 Length: 1 Next: 3038219
+							Gap: 64767
+		Start: 3102986 Length: 1 Next: 3102987
+							Gap: 588
+		Start: 3103575 Length: 1 Next: 3103576
+							Gap: 8389
+		Start: 3111965 Length: 3 Next: 3111968
+							Gap: 61
+		Start: 3112029 Length: 1 Next: 3112030
+							Gap: 10317
+		Start: 3122347 Length: 1 Next: 3122348
+							Gap: 799
+		Start: 3123147 Length: 1 Next: 3123148
+							Gap: 3375
+		Start: 3126523 Length: 1 Next: 3126524
+							Gap: 911
+		Start: 3127435 Length: 1 Next: 3127436
+							Gap: 367
+		Start: 3127803 Length: 4 Next: 3127807
+							Gap: 444
+		Start: 3128251 Length: 3 Next: 3128254
+							Gap: 1740
+		Start: 3129994 Length: 1 Next: 3129995
+							Gap: 243028
+		Start: 3373023 Length: 1 Next: 3373024
+							Gap: 420811
+		Start: 3793835 Length: 1 Next: 3793836
+							Gap: 287473
+		Start: 4081309 Length: 2 Next: 4081311
+							Gap: 321004
+		Start: 4402315 Length: 1 Next: 4402316
+							Gap: 22602
+		Start: 4424918 Length: 1 Next: 4424919
+							Gap: 41512
+		Start: 4466431 Length: 7 Next: 4466438
+							Gap: 10749
+		Start: 4477187 Length: 1 Next: 4477188
+							Gap: 57254
+		Start: 4534442 Length: 1 Next: 4534443
+							Gap: 106946
+		Start: 4641389 Length: 16 Next: 4641405
+							Gap: 466881
+		Start: 5108286 Length: 1 Next: 5108287
+							Gap: 168593
+		Start: 5276880 Length: 1 Next: 5276881
+							Gap: 65320
+		Start: 5342201 Length: 1 Next: 5342202
+							Gap: 2472
+		Start: 5344674 Length: 16 Next: 5344690
+							Gap: 57111
+		Start: 5401801 Length: 16 Next: 5401817
+							Gap: 863723
+		Start: 6265540 Length: 1 Next: 6265541
+							Gap: 72101
+		Start: 6337642 Length: 1 Next: 6337643
+							Gap: 83098
+		Start: 6420741 Length: 16 Next: 6420757
+							Gap: 401871
+		Start: 6822628 Length: 22 Next: 6822650
+							Gap: 292509
+		Start: 7115159 Length: 2 Next: 7115161
+							Gap: 30091
+		Start: 7145252 Length: 17 Next: 7145269
+							Gap: 253277
+		Start: 7398546 Length: 1 Next: 7398547
+							Gap: 197697
+		Start: 7596244 Length: 16 Next: 7596260
+							Gap: 74085
+		Start: 7670345 Length: 1 Next: 7670346
+							Gap: 76018
+		Start: 7746364 Length: 1 Next: 7746365
+							Gap: 251641
+		Start: 7998006 Length: 1 Next: 7998007
+							Gap: 261643
+		Start: 8259650 Length: 1 Next: 8259651
+							Gap: 117295
+		Start: 8376946 Length: 1 Next: 8376947
+							Gap: 85789
+		Start: 8462736 Length: 51216 Next: 8513952
+							Gap: 79579
+		Start: 8593531 Length: 1 Next: 8593532
+							Gap: 269689
+		Start: 8863221 Length: 1 Next: 8863222
+							Gap: 82664
+		Start: 8945886 Length: 1 Next: 8945887
+							Gap: 134235
+		Start: 9080122 Length: 1 Next: 9080123
+							Gap: 45465
+		Start: 9125588 Length: 6 Next: 9125594
+							Gap: 340444
+		Start: 9466038 Length: 1 Next: 9466039
+							Gap: 79462
+		Start: 9545501 Length: 1 Next: 9545502
+							Gap: 4784
+		Start: 9550286 Length: 1 Next: 9550287
+							Gap: 129948
+		Start: 9680235 Length: 1 Next: 9680236
+							Gap: 571
+		Start: 9680807 Length: 1 Next: 9680808
+							Gap: 2737
+		Start: 9683545 Length: 2 Next: 9683547
+							Gap: 16904
+		Start: 9700451 Length: 1 Next: 9700452
+							Gap: 119
+		Start: 9700571 Length: 1 Next: 9700572
+							Gap: 34598
+		Start: 9735170 Length: 2 Next: 9735172
+							Gap: 172524
+		Start: 9907696 Length: 1 Next: 9907697
+							Gap: 1707331
+		Start: 11615028 Length: 1 Next: 11615029
+							Gap: 789487
+		Start: 12404516 Length: 1 Next: 12404517
+							Gap: 420414
+		Start: 12824931 Length: 1 Next: 12824932
+							Gap: 603296
+		Start: 13428228 Length: 1 Next: 13428229
+							Gap: 248480
+		Start: 13676709 Length: 1 Next: 13676710
+							Gap: 351912
+		Start: 14028622 Length: 2 Next: 14028624
+							Gap: 47012
+		Start: 14075636 Length: 2 Next: 14075638
+							Gap: 5459
+		Start: 14081097 Length: 2 Next: 14081099
+							Gap: 95271
+		Start: 14176370 Length: 1 Next: 14176371
+							Gap: 239601
+		Start: 14415972 Length: 1 Next: 14415973
+							Gap: 119138
+		Start: 14535111 Length: 1 Next: 14535112
+							Gap: 81989
+		Start: 14617101 Length: 1 Next: 14617102
+							Gap: 354564
+		Start: 14971666 Length: 1 Next: 14971667
+							Gap: 198630
+		Start: 15170297 Length: 1 Next: 15170298
+							Gap: 410050
+		Start: 15580348 Length: 752 Next: 15581100
+							Gap: 151476
+		Start: 15732576 Length: 1 Next: 15732577
+							Gap: 74754
+		Start: 15807331 Length: 888 Next: 15808219
+							Gap: 58297
+		Start: 15866516 Length: 8 Next: 15866524
+							Gap: 600820
+		Start: 16467344 Length: 47590 Next: 16514934
+							Gap: 759381
+		Start: 17274315 Length: 20 Next: 17274335
+							Gap: 131823
+		Start: 17406158 Length: 7 Next: 17406165
+							Gap: 308357
+		Start: 17714522 Length: 64 Next: 17714586
+							Gap: 738861
+		Start: 18453447 Length: 1 Next: 18453448
+							Gap: 24412
+		Start: 18477860 Length: 1 Next: 18477861
+							Gap: 144552
+		Start: 18622413 Length: 5 Next: 18622418
+							Gap: 648528
+		Start: 19270946 Length: 51210 Next: 19322156
+							Gap: 521848
+		Start: 19844004 Length: 47424 Next: 19891428
+							Gap: 5708571
+		Start: 25599999 Length: 17983 Next: 25617982
+							Gap: 25582017
+		Start: 51199999 Length: 0 Next: 51199999
+
+
+	=======================================================
+	=======================================================
+	NTFS volume 1:
+	----------------
+	initialised..............1
+	read cached..............N
+	Selective caching........N
+	flags....................Volume OK
+	drive....................0x00
+	part order...............2
+	version..................0x0400
+	volsize..................61439999
+	blocksize................512
+	clusterfactor............8
+	clustersize..............4096
+	mftrecordsize............1024
+	indexrecordsize..........4096
+	indexclustperrecord......1
+	bootSectorCopyOffset.....61439999
+	pagefileSys..............-1
+	bootIni..................-1
+	volumeLabel..............[Failsafe]
+	sectorsInUse.............41575000
+	totalNonCopiedBytes......0
+	bytesToCopy..............0
+	bitmapClusters...........235
+	bitmapUsedBytes..........960000
+	estimatedClusters........235
+	estimatedUsedBytes.......960000
+	clustersizeShift.........12
+	blocksizeShift...........9
+	mftrecordsizeShift.......10
+	indexrecordsizeShift.....12
+	totalRootMftRecs.........0
+	clustermap failover......N
+	Boot sector details
+		name....................[NTFS    ]
+		blocksize...............512
+		clusterfactor...........8
+		reservedSectorsUnused...0
+		mediaType...............0xf8
+		secPerTrack.............63
+		numHeads................255
+		hiddenSectors...........10479616
+		volsize.................61439999
+		mftcluster..............786432
+		mftmirrorcluster........16
+		clustersPerMFTRecord....246
+		clustersPerIndexBuffer..1
+
+		---------------------------------------------------
+		Cluster Allocation Map
+		---------------------------------------------------
+		Start: 7679999 Length: 0 Next: 7679999
+
+
+	=======================================================
+	=======================================================
+	NTFS volume 2:
+	----------------
+	initialised..............1
+	read cached..............N
+	Selective caching........N
+	flags....................Volume OK
+	drive....................0x00
+	part order...............1
+	version..................0x0400
+	volsize..................10239999
+	blocksize................512
+	clusterfactor............8
+	clustersize..............4096
+	mftrecordsize............1024
+	indexrecordsize..........4096
+	indexclustperrecord......1
+	bootSectorCopyOffset.....10239999
+	pagefileSys..............-1
+	bootIni..................-1
+	volumeLabel..............[System]
+	sectorsInUse.............4837840
+	totalNonCopiedBytes......0
+	bytesToCopy..............0
+	bitmapClusters...........40
+	bitmapUsedBytes..........160000
+	estimatedClusters........40
+	estimatedUsedBytes.......160000
+	clustersizeShift.........12
+	blocksizeShift...........9
+	mftrecordsizeShift.......10
+	indexrecordsizeShift.....12
+	totalRootMftRecs.........0
+	clustermap failover......N
+	Boot sector details
+		name....................[NTFS    ]
+		blocksize...............512
+		clusterfactor...........8
+		reservedSectorsUnused...0
+		mediaType...............0xf8
+		secPerTrack.............63
+		numHeads................255
+		hiddenSectors...........239616
+		volsize.................10239999
+		mftcluster..............262144
+		mftmirrorcluster........2
+		clustersPerMFTRecord....246
+		clustersPerIndexBuffer..1
+
+		---------------------------------------------------
+		Cluster Allocation Map
+		---------------------------------------------------
+		Start: 1279999 Length: 0 Next: 1279999
+
+
+	=======================================================
+
+Disk Info :
+  remote.............0
+  drive..............0
+  sectorsUsedCount.......972800000
+  estimatedUsedCount.....138640145
+  numPartitions..............1
+  Version............1151
+  Full structure dump....
+   {
+      PID_START_BYTE: 0
+      PID_WIN_9X_ID_PRESERVE: false
+      SVersion: 1151
+      SCylinders: 62260
+      PID_WIN_9X_ID: 1978164454
+      SDiskFormat: 13
+      PID_WIN_NT_ID: 730302962
+      SMbr: 
+         0x0000 33 c0 8e d0 bc 00 7c 8e c0 8e d8 be 00 7c bf 00 
+         0x0010 06 b9 00 02 fc f3 a4 50 68 1c 06 cb fb b9 04 00 
+         0x0020 bd be 07 80 7e 00 00 7c 0b 0f 85 0e 01 83 c5 10 
+         0x0030 e2 f1 cd 18 88 56 00 55 c6 46 11 05 c6 46 10 00 
+         0x0040 b4 41 bb aa 55 cd 13 5d 72 0f 81 fb 55 aa 75 09 
+         0x0050 f7 c1 01 00 74 03 fe 46 10 66 60 80 7e 10 00 74 
+         0x0060 26 66 68 00 00 00 00 66 ff 76 08 68 00 00 68 00 
+         0x0070 7c 68 01 00 68 10 00 b4 42 8a 56 00 8b f4 cd 13 
+         0x0080 9f 83 c4 10 9e eb 14 b8 01 02 bb 00 7c 8a 56 00 
+         0x0090 8a 76 01 8a 4e 02 8a 6e 03 cd 13 66 61 73 1c fe 
+         0x00a0 4e 11 75 0c 80 7e 00 80 0f 84 8a 00 b2 80 eb 84 
+         0x00b0 55 32 e4 8a 56 00 cd 13 5d eb 9e 81 3e fe 7d 55 
+         0x00c0 aa 75 6e ff 76 00 e8 8d 00 75 17 fa b0 d1 e6 64 
+         0x00d0 e8 83 00 b0 df e6 60 e8 7c 00 b0 ff e6 64 e8 75 
+         0x00e0 00 fb b8 00 bb cd 1a 66 23 c0 75 3b 66 81 fb 54 
+         0x00f0 43 50 41 75 32 81 f9 02 01 72 2c 66 68 07 bb 00 
+         0x0100 00 66 68 00 02 00 00 66 68 08 00 00 00 66 53 66 
+         0x0110 53 66 55 66 68 00 00 00 00 66 68 00 7c 00 00 66 
+         0x0120 61 68 00 00 07 cd 1a 5a 32 f6 ea 00 7c 00 00 cd 
+         0x0130 18 a0 b7 07 eb 08 a0 b6 07 eb 03 a0 b5 07 32 e4 
+         0x0140 05 00 07 8b f0 ac 3c 00 74 09 bb 07 00 b4 0e cd 
+         0x0150 10 eb f2 f4 eb fd 2b c9 e4 64 eb 00 24 02 e0 f8 
+         0x0160 24 02 c3 49 6e 76 61 6c 69 64 20 70 61 72 74 69 
+         0x0170 74 69 6f 6e 20 74 61 62 6c 65 00 45 72 72 6f 72 
+         0x0180 20 6c 6f 61 64 69 6e 67 20 6f 70 65 72 61 74 69 
+         0x0190 6e 67 20 73 79 73 74 65 6d 00 4d 69 73 73 69 6e 
+         0x01a0 67 20 6f 70 65 72 61 74 69 6e 67 20 73 79 73 74 
+         0x01b0 65 6d 00 00 00 63 7b 9a f2 89 87 2b 00 00 80 20 
+         0x01c0 21 00 07 89 8c 7d 00 08 00 00 00 40 9c 00 00 89 
+         0x01d0 8d 7d 07 fe ff ff 00 48 9c 00 00 00 71 02 00 fe 
+         0x01e0 ff ff 07 fe ff ff 00 48 0d 03 00 80 fc 0a 00 fe 
+         0x01f0 ff ff 0f fe ff ff 00 c8 09 0e 00 40 94 2d 55 aa 
+         0x0200 
+      SIsSpanned: false
+      SOs2Name: 
+         0x0000 00 00 00 00 00 00 00 00 00 00 
+      SFingerprint: 6997cfa9
+      SHeadsPerCyl: ff
+      SectorsPerTrack: 3f
+      SRemote: false
+      SEndOfImagePosition: a6765350e
+      PID_BYTE_COUNT: 773c256000
+      SFlags: 1
+      SPatchedFileCount: 0
+      SDrive: 0
+      PID_BOOT_CODE: 
+         0x0000 33 c0 8e d0 bc 00 7c 8e c0 8e d8 be 00 7c bf 00 
+         0x0010 06 b9 00 02 fc f3 a4 50 68 1c 06 cb fb b9 04 00 
+         0x0020 bd be 07 80 7e 00 00 7c 0b 0f 85 0e 01 83 c5 10 
+         0x0030 e2 f1 cd 18 88 56 00 55 c6 46 11 05 c6 46 10 00 
+         0x0040 b4 41 bb aa 55 cd 13 5d 72 0f 81 fb 55 aa 75 09 
+         0x0050 f7 c1 01 00 74 03 fe 46 10 66 60 80 7e 10 00 74 
+         0x0060 26 66 68 00 00 00 00 66 ff 76 08 68 00 00 68 00 
+         0x0070 7c 68 01 00 68 10 00 b4 42 8a 56 00 8b f4 cd 13 
+         0x0080 9f 83 c4 10 9e eb 14 b8 01 02 bb 00 7c 8a 56 00 
+         0x0090 8a 76 01 8a 4e 02 8a 6e 03 cd 13 66 61 73 1c fe 
+         0x00a0 4e 11 75 0c 80 7e 00 80 0f 84 8a 00 b2 80 eb 84 
+         0x00b0 55 32 e4 8a 56 00 cd 13 5d eb 9e 81 3e fe 7d 55 
+         0x00c0 aa 75 6e ff 76 00 e8 8d 00 75 17 fa b0 d1 e6 64 
+         0x00d0 e8 83 00 b0 df e6 60 e8 7c 00 b0 ff e6 64 e8 75 
+         0x00e0 00 fb b8 00 bb cd 1a 66 23 c0 75 3b 66 81 fb 54 
+         0x00f0 43 50 41 75 32 81 f9 02 01 72 2c 66 68 07 bb 00 
+         0x0100 00 66 68 00 02 00 00 66 68 08 00 00 00 66 53 66 
+         0x0110 53 66 55 66 68 00 00 00 00 66 68 00 7c 00 00 66 
+         0x0120 61 68 00 00 07 cd 1a 5a 32 f6 ea 00 7c 00 00 cd 
+         0x0130 18 a0 b7 07 eb 08 a0 b6 07 eb 03 a0 b5 07 32 e4 
+         0x0140 05 00 07 8b f0 ac 3c 00 74 09 bb 07 00 b4 0e cd 
+         0x0150 10 eb f2 f4 eb fd 2b c9 e4 64 eb 00 24 02 e0 f8 
+         0x0160 24 02 c3 49 6e 76 61 6c 69 64 20 70 61 72 74 69 
+         0x0170 74 69 6f 6e 20 74 61 62 6c 65 00 45 72 72 6f 72 
+         0x0180 20 6c 6f 61 64 69 6e 67 20 6f 70 65 72 61 74 69 
+         0x0190 6e 67 20 73 79 73 74 65 6d 00 4d 69 73 73 69 6e 
+         0x01a0 67 20 6f 70 65 72 61 74 69 6e 67 20 73 79 73 74 
+         0x01b0 65 6d 00 00 00 63 7b 9a f2 89 87 2b 00 00 
+      PID_WIN_NT_ID_PRESERVE: false
+      PID_DISK_NOTIFY_OS: true
+      PID_PARTITION_NODE_FORMAT: d
+      SEstimatedUsed: 8437b11
+      STotalSectors: 3b9e12b0
+      SPartitions: 
+      {
+         PID_POSITION_ID: 1.3:
+         SFlagInp: 3
+         SFileOperationOffset: 0
+         PID_VOLUME_NAME: WIP-543805B-040
+         PID_FIND_FIRST: false
+         PID_FIND_BEST_FIT: false
+         SSlot: 2
+         SNumSects: afc8000
+         PID_VOLUME_TYPE: 1
+         PID_START_CHS_MAXED_OUT: true
+         PID_FORMAT_TYPE: 8
+         SOrder: 2
+         SFpos: 1400
+         PID_VOLUME_SLOT_NUMBER: 2
+         PID_END_CHS: 
+         {
+            PID_SECTOR: 3f
+            PID_HEAD: fe
+            PID_CYLINDER: 3ff
+         }
+         PID_VOLUME_START: 61a8ffe00
+         SBootable: false
+         PID_CLEANLY_SHUTDOWN: true
+         SExtended: false
+         SSystemId: 7
+         SSizeAdjustment: 0
+         PID_IS_VOLUME_CONTAINER: false
+         PID_SYSTEM_ID: 7
+         PID_START_CHS: 
+         {
+            PID_SECTOR: 3f
+            PID_HEAD: fe
+            PID_CYLINDER: 3ff
+         }
+         PID_FORMAT: 8
+         PID_ACTIVE: false
+         PID_EXTENT: 
+         {
+            PID_EXTENT_CONTAINER_EXTENT_INDEX: 0
+            PID_EXTENT_START: 61a8ffe00
+            PID_EXTENT_SIZE_MINIMUM: 15f9000000
+            PID_EXTENT_SIZE_MAXIMUM: 15f9000000
+         }
+         SFirstSect: 30d4800
+         PID_READ_ONLY: false
+         PID_FIND_LAST: false
+         PID_NAME: 
+         SFlags: 0
+         PID_ROLE_FORMAT_MATCHING_TYPE: 0
+         SEndFpos: a67337424
+         PID_VOLUME_SIZE_MINIMUM: 15f9000000
+         PID_PARENT_BOOT_RECORD_SECTOR_OFFSET: 0
+         PID_FIND_WORST_FIT: false
+         SGflags: 4
+         PID_NO_HARD_ERROR: true
+         PID_VOLUME_SIZE_MAXIMUM: 15f9000000
+         PID_END_CHS_MAXED_OUT: true
+         PID_HIDDEN: false
+         PID_IS_VOLUME: true
+         PID_VOLUME_NOTIFY_OS: true
+         PID_PARENT_BOOT_RECORD_SLOT_NUMBER: 2
+         SSectorsUsed: 8f37b10
+         PID_ROLE: 2
+      }
+      PID_CONTAINER_ID: 1:
+      SSectorsUsed: 39fbc000
+   }
+
+
+ # Ord Boot Id Ext     First        Num       Last       Used NTFS
+ 0  2    0   7 No   51202048  184320000  235522048  150174480 Yes
+
+Disk Info :
+  remote.............0
+  drive..............0
+  sectorsUsedCount.......2000372400
+  estimatedUsedCount.....46693226
+  numPartitions..............4
+  Version............0
+  Full structure dump....
+   {
+      PID_START_BYTE: 0
+      SVersion: 0
+      SCylinders: 65535
+      SDiskFormat: 19
+      SMbr: 
+         0x0000 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0010 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0040 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0050 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0060 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0070 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0080 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0090 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00a0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00b0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00c0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00d0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00e0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x00f0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0100 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0110 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0120 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0130 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0140 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0150 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0160 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0170 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0180 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x0190 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x01a0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x01b0 00 00 00 00 00 00 00 00 36 18 53 38 00 00 00 00 
+         0x01c0 02 00 ee fe bf 66 01 00 00 00 ff ff ff ff 00 00 
+         0x01d0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x01e0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+         0x01f0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa 
+         0x0200 
+      SIsSpanned: false
+      SOs2Name: 
+         0x0000 00 00 00 00 00 00 00 00 00 00 
+      SFingerprint: 0
+      SHeadsPerCyl: ff
+      SectorsPerTrack: 3f
+      SRemote: false
+      SEndOfImagePosition: 0
+      PID_BYTE_COUNT: ee77a56000
+      SFlags: 1
+      SPatchedFileCount: 0
+      PID_GPT_SLOT_COUNT: 80
+      SDrive: 0
+      PID_GPT_UUID: 88b7ea96-8829-4d92-86b6-ad2a7f3130bb
+      PID_DISK_NOTIFY_OS: true
+      PID_PARTITION_NODE_FORMAT: 13
+      SEstimatedUsed: 2c87b6a
+      STotalSectors: 773bd2b0
+      SPartitions: 
+      [
+
+         {
+            PID_POSITION_ID: 1.4:
+            SFlagInp: 0
+            SFileOperationOffset: 0
+            PID_VOLUME_NAME: 
+            PID_FIND_FIRST: false
+            PID_FIND_BEST_FIT: false
+            SSlot: 4
+            PID_PARTITION_TYPE: ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+            PID_PARTITION_ATTRIBUTES: 8000000000000000
+            SNumSects: 186a0000
+            PID_FORMAT_TYPE: 8
+            SOrder: 3
+            SFpos: 0
+            PID_VOLUME_SLOT_NUMBER: 4
+            PID_VOLUME_START: 892cfbc00
+            SBootable: false
+            PID_CLEANLY_SHUTDOWN: true
+            SExtended: false
+            SSystemId: 7
+            SSizeAdjustment: 0
+            PID_IS_VOLUME_CONTAINER: false
+            PID_PARTITION_ID: c1c4727f-cb3b-4a59-862a-5b9c0c0fa8ea
+            PID_FORMAT: 1
+            PID_ACTIVE: false
+            PID_EXTENT: 
+            {
+               PID_EXTENT_CONTAINER_EXTENT_INDEX: 0
+               PID_EXTENT_START: 892cfbc00
+               PID_EXTENT_SIZE_MINIMUM: 30d4000000
+               PID_EXTENT_SIZE_MAXIMUM: 30d4000000
+            }
+            SFirstSect: 4496800
+            PID_READ_ONLY: false
+            PID_FIND_LAST: false
+            PID_NAME: Basic data partition
+            SFlags: 0
+            PID_ROLE_FORMAT_MATCHING_TYPE: 0
+            SEndFpos: 0
+            PID_VOLUME_SIZE_MINIMUM: 30d4000000
+            PID_FIND_WORST_FIT: false
+            SGflags: 4
+            PID_PARTITION_NAME: Basic data partition
+            PID_NO_HARD_ERROR: true
+            PID_VOLUME_SIZE_MAXIMUM: 30d4000000
+            PID_HIDDEN: false
+            PID_IS_VOLUME: true
+            PID_VOLUME_NOTIFY_OS: true
+            SSectorsUsed: 34a18
+            PID_ROLE: 2
+         }
+
+         {
+            PID_POSITION_ID: 1.2:
+            SFlagInp: 0
+            SFileOperationOffset: 0
+            PID_VOLUME_NAME: System
+            PID_FIND_FIRST: false
+            PID_FIND_BEST_FIT: false
+            SSlot: 2
+            PID_PARTITION_TYPE: ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+            PID_PARTITION_ATTRIBUTES: 8000000000000000
+            SNumSects: 9c4000
+            PID_FORMAT_TYPE: 8
+            SOrder: 1
+            SFpos: 0
+            PID_VOLUME_SLOT_NUMBER: 2
+            PID_VOLUME_START: 74fbc00
+            SBootable: false
+            PID_CLEANLY_SHUTDOWN: true
+            SExtended: false
+            SSystemId: 7
+            SSizeAdjustment: 0
+            PID_IS_VOLUME_CONTAINER: false
+            PID_PARTITION_ID: 38adf684-ac47-4ede-909d-1ea993799b3c
+            PID_FORMAT: 1
+            PID_ACTIVE: false
+            PID_EXTENT: 
+            {
+               PID_EXTENT_CONTAINER_EXTENT_INDEX: 0
+               PID_EXTENT_START: 74fbc00
+               PID_EXTENT_SIZE_MINIMUM: 138800000
+               PID_EXTENT_SIZE_MAXIMUM: 138800000
+            }
+            SFirstSect: 3a800
+            PID_READ_ONLY: false
+            PID_FIND_LAST: false
+            PID_NAME: Basic data partition
+            SFlags: 0
+            PID_ROLE_FORMAT_MATCHING_TYPE: 0
+            SEndFpos: 0
+            PID_VOLUME_SIZE_MINIMUM: 138800000
+            PID_FIND_WORST_FIT: false
+            SGflags: 4
+            PID_PARTITION_NAME: Basic data partition
+            PID_NO_HARD_ERROR: true
+            PID_VOLUME_SIZE_MAXIMUM: 138800000
+            PID_HIDDEN: false
+            PID_IS_VOLUME: true
+            PID_VOLUME_NOTIFY_OS: true
+            SSectorsUsed: 49d1d0
+            PID_ROLE: 2
+         }
+
+         {
+            PID_POSITION_ID: 1.3:
+            SFlagInp: 0
+            SFileOperationOffset: 0
+            PID_VOLUME_NAME: Failsafe
+            PID_FIND_FIRST: false
+            PID_FIND_BEST_FIT: false
+            SSlot: 3
+            PID_PARTITION_TYPE: ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+            PID_PARTITION_ATTRIBUTES: 0
+            PID_VOLUME_DRIVE_LETTER: C:
+            SNumSects: 3a98000
+            PID_FORMAT_TYPE: 8
+            SOrder: 2
+            SFpos: 0
+            PID_VOLUME_SLOT_NUMBER: 3
+            PID_VOLUME_START: 13fcfbc00
+            SBootable: false
+            PID_CLEANLY_SHUTDOWN: true
+            SExtended: false
+            SSystemId: 7
+            SSizeAdjustment: 0
+            PID_IS_VOLUME_CONTAINER: false
+            PID_PARTITION_ID: a868e056-553f-44d1-93a2-bd5fbab37621
+            PID_FORMAT: 1
+            PID_ACTIVE: false
+            PID_EXTENT: 
+            {
+               PID_EXTENT_CONTAINER_EXTENT_INDEX: 0
+               PID_EXTENT_START: 13fcfbc00
+               PID_EXTENT_SIZE_MINIMUM: 753000000
+               PID_EXTENT_SIZE_MAXIMUM: 753000000
+            }
+            SFirstSect: 9fe800
+            PID_READ_ONLY: false
+            PID_FIND_LAST: false
+            PID_NAME: Basic data partition
+            SFlags: 0
+            PID_ROLE_FORMAT_MATCHING_TYPE: 0
+            SEndFpos: 0
+            PID_VOLUME_SIZE_MINIMUM: 753000000
+            PID_FIND_WORST_FIT: false
+            SGflags: 4
+            PID_PARTITION_NAME: Basic data partition
+            PID_NO_HARD_ERROR: true
+            PID_VOLUME_SIZE_MAXIMUM: 753000000
+            PID_HIDDEN: false
+            PID_IS_VOLUME: true
+            PID_VOLUME_NOTIFY_OS: true
+            SSectorsUsed: 27a6258
+            PID_ROLE: 2
+         }
+
+         {
+            PID_POSITION_ID: 1.1:
+            SFlagInp: 0
+            SFileOperationOffset: 0
+            PID_VOLUME_NAME: 
+            PID_FIND_FIRST: false
+            PID_FIND_BEST_FIT: false
+            SSlot: 0
+            PID_PARTITION_TYPE: c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+            PID_PARTITION_ATTRIBUTES: 8000000000000000
+            SNumSects: 32000
+            PID_FORMAT_TYPE: 3
+            SOrder: 0
+            SFpos: 0
+            PID_VOLUME_SLOT_NUMBER: 0
+            PID_VOLUME_START: fbc00
+            SBootable: false
+            PID_CLEANLY_SHUTDOWN: true
+            SExtended: false
+            SSystemId: ef
+            SSizeAdjustment: 0
+            PID_IS_VOLUME_CONTAINER: false
+            PID_PARTITION_ID: 7f9f1a70-d346-4828-a2e4-de95108fc01c
+            PID_FORMAT: 3
+            PID_ACTIVE: false
+            PID_EXTENT: 
+            {
+               PID_EXTENT_CONTAINER_EXTENT_INDEX: 0
+               PID_EXTENT_START: fbc00
+               PID_EXTENT_SIZE_MINIMUM: 6400000
+               PID_EXTENT_SIZE_MAXIMUM: 6400000
+            }
+            SFirstSect: 800
+            PID_READ_ONLY: false
+            PID_FIND_LAST: false
+            PID_NAME: EFI system partition
+            SFlags: 0
+            PID_ROLE_FORMAT_MATCHING_TYPE: 0
+            SEndFpos: 0
+            PID_VOLUME_SIZE_MINIMUM: 6400000
+            PID_FIND_WORST_FIT: false
+            SGflags: 18
+            PID_PARTITION_NAME: EFI system partition
+            PID_NO_HARD_ERROR: true
+            PID_VOLUME_SIZE_MAXIMUM: 6400000
+            PID_HIDDEN: false
+            PID_IS_VOLUME: true
+            PID_VOLUME_NOTIFY_OS: true
+            SSectorsUsed: fd2a
+            PID_ROLE: 4
+         }
+      ]
+      PID_CONTAINER_ID: 1:
+      SSectorsUsed: 773b42b0
+   }
+
+
+ # Ord Boot Id Ext     First        Num       Last       Used NTFS
+ 0  3    0   7 No   71919616  409600000  481519616     215576 Yes
+ 1  1    0   7 No     239616   10240000   10479616    4837840 Yes
+ 2  2    0   7 No   10479616   61440000   71919616   41575000 Yes
+ 3  0    0  ef No       2048     204800     206848      64810 No
+
+Fixed Drives
+
+Drive 0 NVMe BM9C1a Samsung 1 0109
+
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Cylinders                124519
+Heads                    255
+Sectors per Track        63
+
+Drive 0 NVMe BM9C1a Samsung 1 0109
+ASPI
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Successful IO Count      0
+
+WinNT (Active)
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Cylinders                124519
+Heads                    255
+Sectors per Track        63
+Successful IO Count      16
+
+AsyncIo : 1
+NTFS MFT or Attribute Structure 
+000: 80 00 00 00 78 00 00 00 01 00 00 00 00 00 04 00 	....x...........
+016: 00 00 00 00 00 00 00 00 E1 1F 00 00 00 00 00 00 	................
+032: 40 00 00 00 00 00 00 00 00 20 FE 01 00 00 00 00 	@........ ......
+048: 5A 17 FE 01 00 00 00 00 5A 17 FE 01 00 00 00 00 	Z.......Z.......
+064: 32 0B 10 97 D4 21 31 33 22 BA FE 32 82 00 2F 0F 	2....!13"..2../.
+080: 02 31 30 8D 59 01 31 30 52 1B FD 42 F0 02 F5 A9 	.10.Y.10R..B....
+096: CC 00 42 75 03 85 7B 2F FF 42 78 03 22 FB D3 00 	..Bu..{/.Bx."...
+112: 42 E5 04 09 7A 38 FF 00 FF FF FF FF 82 79 47 11 	B...z8.......yG.
+128: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+144: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+160: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+176: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+192: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+208: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+224: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+240: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+256: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+272: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+288: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+304: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+320: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+336: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+352: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+368: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+384: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+416: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+432: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+448: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+464: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+496: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+512: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+528: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+544: 00 00 00 00 00 00 00 00 00 04 00 00 01 04 00 00 	................
+560: 46 49 4C 45 30 00 03 00 FF 6A 31 BF 05 00 00 00 	FILE0....j1.....
+576: 01 00 01 00 38 00 01 00 40 02 00 00 00 04 00 00 	....8...@.......
+592: 00 00 00 00 00 00 00 00 07 00 00 00 00 00 00 00 	................
+608: A9 04 A7 31 00 00 00 00 10 00 00 00 60 00 00 00 	...1........`...
+624: 00 00 18 00 00 00 00 00 48 00 00 00 18 00 00 00 	........H.......
+640: 9F BB 8A 02 B3 CF D5 01 9F BB 8A 02 B3 CF D5 01 	................
+656: 9F BB 8A 02 B3 CF D5 01 9F BB 8A 02 B3 CF D5 01 	................
+672: 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+688: 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 	................
+704: 00 00 00 00 00 00 00 00 30 00 00 00 68 00 00 00 	........0...h...
+720: 00 00 18 00 00 00 03 00 4A 00 00 00 18 00 01 00 	........J.......
+736: 05 00 00 00 00 00 05 00 9F BB 8A 02 B3 CF D5 01 	................
+752: 9F BB 8A 02 B3 CF D5 01 9F BB 8A 02 B3 CF D5 01 	................
+768: 9F BB 8A 02 B3 CF D5 01 00 40 00 00 00 00 00 00 	.........@......
+784: 00 40 00 00 00 00 00 00 06 00 00 00 00 00 00 00 	.@..............
+800: 04 03 24 00 4D 00 46 00 54 00 00 00 00 00 00 00 	..$.M.F.T.......
+816: 80 00 00 00 68 00 00 00 01 00 40 00 00 00 06 00 	....h.....@.....
+832: 00 00 00 00 00 00 00 00 7F 6B 04 00 00 00 00 00 	.........k......
+848: 40 00 00 00 00 00 00 00 00 00 B8 46 00 00 00 00 	@..........F....
+864: 00 00 B8 46 00 00 00 00 00 00 B8 46 00 00 00 00 	...F.......F....
+880: 33 40 68 01 00 00 0C 33 10 C8 00 90 21 75 43 0A 	3@h....3....!uC.
+896: C8 00 92 EB A4 00 33 E6 B9 00 6E 38 D5 33 40 B9 	......3...n8.3@.
+912: 00 14 86 33 00 00 00 00 B0 00 00 00 D0 00 00 00 	...3............
+928: 01 00 40 00 00 00 05 00 00 00 00 00 00 00 00 00 	..@.............
+944: 24 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 	$.......@.......
+960: 00 50 02 00 00 00 00 00 08 40 02 00 00 00 00 00 	.P.......@......
+976: 08 40 02 00 00 00 00 00 31 07 FF 26 44 31 01 01 	.@......1..&D1..
+992: 2A DA 31 01 54 FF 01 31 01 E8 D2 00 31 01 BD BA 	*.1.T..1....1...
+1008: 04 31 01 B2 05 14 31 01 DE 98 DA 31 01 E9 55 6B 	.1....1....1..Uk
+1024: 31 01 C2 68 31 31 01 BC F2 E5 31 01 09 4D 50 31 	1..h11....1..MP1
+1040: 03 D5 1D 22 41 01 2E 25 0D FF 41 03 D5 DA F2 00 	..."A..%..A.....
+1056: 41 01 A3 F5 00 FF 31 01 62 F6 38 21 01 B5 A7 31 	A.....1.b.8!...1
+1072: 01 45 58 0D 41 01 04 14 B9 00 31 01 F3 30 D4 41 	.EX.A.....1..0.A
+1088: 01 BA 49 40 FF 31 01 82 3D 26 31 01 8F 93 2C 31 	..I@.1..=&1...,1
+1104: 01 AA 4E 05 31 01 24 DC 79 41 01 AA 4C 3E FF 31 	..N.1.$.yA..L>.1
+1120: 01 3F AE 46 00 00 00 00 FF FF FF FF 00 00 00 00 	.?.F............
+1136: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1152: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1168: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1184: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1216: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1232: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1248: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1264: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1296: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1312: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1328: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1344: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1360: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1376: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1392: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1408: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1424: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1440: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1456: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1472: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1488: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1504: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1520: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1536: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1552: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1568: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 	................
+1584: 00 04 00 00 19 00 00 00 FC B4 6B 03 14 D8 6A 02 	..........k...j.
+1600: FC B4 6B 03 7A D4 30 00 D0 1D CD 03 01 00 00 00 	..k.z.0.........
+1616: 18 00 00 00 19 00 00 00 D4 D7 6A 02 B4 84 6B 02 	..........j...k.
+1632: 04 FC BA 03 7B D4 30 00 98 1D CD 03 01 00 00 00 	....{.0.........
+1648: 18 00 00 00 19 00 00 00 FC B4 6B 03 C4 FB BA 03 	..........k.....
+1664: FC B4 6B 03 7C D4 30 00 60 1D CD 03 01 00 00 00 	..k.|.0.`.......
+1680: 18 00 00 00 19 00 00 00 A4 FB BA 03 04 FC BA 03 	................
+1696: E4 FB BA 03 7D D4 30 00 28 1D CD 03 01 00 00 00 	....}.0.(.......
+1712: 18 00 00 00 19 00 00 00 FC B4 6B 03 C4 FB BA 03 	..........k.....
+1728: FC B4 6B 03 7E D4 30 00 F0 1C CD 03 01 00 00 00 	..k.~.0.........
+1744: 18 00 00 00 19 00 00 00 C4 FB BA 03 84 FB BA 03 	................
+1760: A4 55 BA 03 7F D4 30 00 B8 1C CD 03 01 00 00 00 	.U....0.........
+1776: 18 00 00 00 19 00 00 00 FC B4 6B 03 A4 55 BA 03 	..........k..U..
+1792: FC B4 6B 03 80 D4 30 00 80 1C CD 03 01 00 00 00 	..k...0.........
+1808: 18 00 00 00 A1 1D 00 00 B4 54 6A 02 3C 00 64 02 	.........Tj.<.d.
+1824: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1840: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1856: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1872: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1888: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1904: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1920: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1936: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1952: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1968: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+1984: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+2000: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+2016: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+2032: 5C 55 6A 02 00 00 00 00 B4 54 6A 02 3C 00 64 02 	\Uj......Tj.<.d.
+
+Image Devices
+
+Key[1]   1.1:
+Key[2]   1:1
+Path     1.1:
+Desc     1.1: []
+Type     FAT
+Disk     0
+Offset   2048
+
+Key[1]   1.2:
+Key[2]   1:2
+Path     1.2:
+Desc     1.2: [System]
+Type     NTFS
+Disk     0
+Offset   239616
+
+Key[1]   1.3:
+Key[2]   1:3
+Key[3]   C:
+Path     C:
+Desc     C: 1.3: [Failsafe]
+Type     NTFS
+Disk     0
+Offset   10479616
+
+
+Volume attributes
+=================
+1.1:
+Attribute dump
+DiskSignatureNt:944969782
+DiskModelNumber:NVMe BM9C1a Samsung 1 0109
+VolumeSectorOffset:2048
+
+1.2:
+Attribute dump
+DiskSignatureNt:944969782
+DiskModelNumber:NVMe BM9C1a Samsung 1 0109
+VolumeSectorOffset:239616
+
+1.3:
+Attribute dump
+DiskSignatureNt:944969782
+DiskModelNumber:NVMe BM9C1a Samsung 1 0109
+VolumeSectorOffset:10479616
+
+1.4:
+Attribute dump
+DiskSignatureNt:944969782
+DiskModelNumber:NVMe BM9C1a Samsung 1 0109
+VolumeSectorOffset:71919616
+
+80.1:
+Attribute dump
+DiskModelNumber:OS Volumes
+VolumeSectorOffset:10479616
+
+LargeMemoryAllocationFactory diagnostic...
+==========================================
+
+Heap available at construction: 12807970816
+Current heap available:         12684922880
+Total Memory:                   16851456000
+
+Allocated
+
+DiskManager diagnostic...
+=========================
+
+Fixed Drives
+
+Drive 0 NVMe BM9C1a Samsung 1 0109
+
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Cylinders                124519
+Heads                    255
+Sectors per Track        63
+
+Drive 0 NVMe BM9C1a Samsung 1 0109
+ASPI
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Successful IO Count      0
+
+WinNT (Active)
+Total Sectors            2000409264
+Bytes per Sector         512
+MB                       976762
+Cylinders                124519
+Heads                    255
+Sectors per Track        63
+Successful IO Count      20
+
+FilesystemMounter diagnostic...
+===============================
+
+
+FilesystemManager diagnostic...
+===============================
+
+Volume 1
+VolumePos: 1.3:
+DriveLetter: C:
+Description:   29.30GB Disk 0 Offset       5GB   29.30GB NVMe BM9C1a Samsung 1 0109
+Type:        fsfNtfsWindowsXP
+Name:        Failsafe
+
+Volume 2
+VolumePos: 1.1:
+DriveLetter: 
+Description:     100MB Disk 0 Offset       1MB     100MB NVMe BM9C1a Samsung 1 0109
+Type:        fsfFat32
+Name:        
+
+Volume 3
+VolumePos: 1.2:
+DriveLetter: 
+Description:    4.88GB Disk 0 Offset     117MB    4.88GB NVMe BM9C1a Samsung 1 0109
+Type:        fsfNtfsWindowsXP
+Name:        System
+
+Volume 4
+VolumePos: 1.4:
+DriveLetter: 
+Description:  195.31GB Disk 0 Offset   34.29GB  195.31GB NVMe BM9C1a Samsung 1 0109
+Volume Inaccessible
+
+Volume 5
+VolumePos: 80.1:
+DriveLetter: C:
+Description:   29.30GB Disk 79 Offset       5GB   29.30GB OS Volumes
+Type:        fsfNtfsWindowsXP
+Name:        Failsafe
+
+
+LfoFilesystemManager diagnostic...
+==================================
+
+Filesystem Index: 0
+Filesystem Descriptor:
+  ID's:
+    ID Type: 2
+    ID: C:
+    ID Type: 1
+    ID: 1.3:
+    ID Type: 4
+    ID: FAILSAFE:
+  DriveType: 4
+  FilesystemInfo:
+    formatType: 8
+    volumeName: Failsafe
+
+Filesystem Index: 1
+Filesystem Descriptor:
+  ID's:
+    ID Type: 1
+    ID: 1.1:
+  DriveType: 4
+  FilesystemInfo:
+    formatType: 3
+    volumeName: 
+
+Filesystem Index: 2
+Filesystem Descriptor:
+  ID's:
+    ID Type: 1
+    ID: 1.2:
+    ID Type: 4
+    ID: SYSTEM:
+  DriveType: 4
+  FilesystemInfo:
+    formatType: 8
+    volumeName: System
+
+Filesystem Index: 3
+Filesystem Descriptor:
+  ID's:
+    ID Type: 1
+    ID: 1.4:
+  DriveType: 4
+  FilesystemInfo:
+    formatType: 8
+    volumeName: 
+  Filesystem is inaccessible.
+
+Filesystem Index: 4
+Filesystem Descriptor:
+  ID's:
+    ID Type: 1
+    ID: 80.1:
+    ID Type: 4
+    ID: FAILSAFE:
+  DriveType: 4
+  FilesystemInfo:
+    formatType: 8
+    volumeName: Failsafe
+
+
+Environment Variables
+=====================
+
+ALLUSERSPROFILE=C:\ProgramData
+APPDATA=C:\Users\Administrator\AppData\Roaming
+Choice="C:\windows\system32\choice.exe" /M
+CLIENTNAME=MY-PEN-PF3YQM5R
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+CommonProgramW6432=C:\Program Files\Common Files
+COMPUTERNAME=DIGI8003100PEN
+ComSpec=C:\Windows\system32\cmd.exe
+Default_PW=t1Pw4AtS
+Default_Server=us-aus-argo.ni.corp.natinst.com
+Default_Share=\\us-aus-argo.ni.corp.natinst.com\MfgTest\Images\Released
+Default_Share_Used=true
+Default_User=NI\GlobalTestEng
+DriverData=C:\Windows\System32\Drivers\DriverData
+FindStr="C:\windows\system32\findstr.exe"
+HOMEDRIVE=C:
+HOMEPATH=\Users\Administrator
+Image_Server=us-aus-argo.ni.corp.natinst.com
+Image_Share=\\us-aus-argo.ni.corp.natinst.com\MfgTest\Images\Released
+Image_Share_Password=t1Pw4AtS
+Image_Share_User=NI\GlobalTestEng
+Launch_Tool=true
+LOCALAPPDATA=C:\Users\Administrator\AppData\Local
+Local_Image_Tool_Directory=C:\mounts\system
+LOGONSERVER=\\DIGI8003100PEN
+Mapped_Drive=Z:
+NO_LAUNCH=false
+NSLookup="C:\windows\system32\nslookup.exe"
+NUMBER_OF_PROCESSORS=20
+OS=Windows_NT
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;C:\Program Files (x86)\National Instruments\Shared\LabVIEW Run-Time\2012
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+PROCESSOR_ARCHITECTURE=x86
+PROCESSOR_ARCHITEW6432=AMD64
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 183 Stepping 1, GenuineIntel
+PROCESSOR_LEVEL=6
+PROCESSOR_REVISION=b701
+ProgramData=C:\ProgramData
+ProgramFiles=C:\Program Files (x86)
+ProgramFiles(x86)=C:\Program Files (x86)
+ProgramW6432=C:\Program Files
+PROMPT=$P$G
+PSModulePath=C:\Users\Administrator\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC=C:\Users\Public
+RESULT=SUCCESS
+ROBOCOPY="Z:\Multi-Image-2.5\Tool\Utilities\robocopy.exe" 
+SESSIONNAME=RDP-Tcp#9
+SystemDrive=C:
+SystemRoot=C:\Windows
+TEMP=C:\Users\ADMINI~1\AppData\Local\Temp
+TMP=C:\Users\ADMINI~1\AppData\Local\Temp
+USERDOMAIN=DIGI8003100PEN
+USERDOMAIN_ROAMINGPROFILE=DIGI8003100PEN
+USERNAME=Administrator
+USERPROFILE=C:\Users\Administrator
+windir=C:\Windows
+
+
+*********************************
