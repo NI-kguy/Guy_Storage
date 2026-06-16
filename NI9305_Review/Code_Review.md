@@ -147,3 +147,14 @@ Why is the Overvoltage Test placed in the middle of the test sequence?
 ### Recommendation
 
 Move the **Overvoltage Test to the beginning of the test sequence**. As a protection/safety check, it should run first before any other tests to ensure the DUT is safe to proceed with further testing.
+
+---
+
+## Review #12 — Settling Time Test
+
+![Settling Time Test - Case Structure](./Review_12_Settling.PNG)
+
+### Question
+
+Why is a Case Structure needed here?
+With the constant "F", you should not using True part. just remove it if not using.
