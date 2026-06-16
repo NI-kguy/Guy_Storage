@@ -67,7 +67,6 @@ The sanity check (comparing the DMM measured voltage against the expected percen
 
 **Recommendation:** Connect the sanity check error wire **upstream** of the NI9305 ADC acquisition node. This ensures the test aborts immediately if the stimulus is out of range, rather than proceeding with a bad measurement. All error terminals in this section should be chained in sequence — no dangling or parallel error lines.
 
-
 ---
 
 ## Review #5 — Initial Accuracy and Range Test (SDI)
@@ -77,9 +76,74 @@ The sanity check (comparing the DMM measured voltage against the expected percen
 ### Recommendation
 
 1. **DMM Measurement label** — Rename the SDI label from `DMM Measurement` to `DMM Measurement (Sanity Check)` to make its purpose explicit at a glance.
-
 2. **Add test limits** — Add a test limit to the DMM Measurement (Sanity Check) SDI entry so the sanity check has a defined pass/fail boundary, rather than relying solely on the percentage check in the block diagram.
 
 ---
 
-<!-- Add next review below this line -->
+## Review #6 — CH-CH Short AI and PFI0 Test
+
+### Status: Looks good ✓
+
+No issues found. The CH-CH Short AI and PFI0 Test implementation is approved.
+
+---
+
+## Review #7 — TrimPOT Test
+
+![TrimPOT Test - Coercion Dots](./Review_7_coercion_dot.PNG)
+
+### Recommendation
+
+Minimize coercion dots in the block diagram, especially on numeric inputs. Coercion dots indicate a data type mismatch and can cause unintended implicit conversions.
+
+> **Note:** Check all other related VIs for the same issue and fix them as well.
+
+---
+
+## Review #8 — TrimPOT Test: Unconnected Error Terminals
+
+![TrimPOT Test - Unconnected Error Terminals](./Review_8_error.PNG)
+
+### Recommendation
+
+Ensure all sub-VI error terminals (both error in and error out) are connected and chained properly throughout the block diagram.
+
+> **Note:** Check all other related VIs for the same issue and fix them as well.
+
+---
+
+## Review #9 — Trigger Test
+
+![Trigger Test - Voltage Configuration](./Review_9_Voltage_Conf.PNG)
+
+### Question
+
+Why is the voltage set to **8V** instead of **9V**? Please clarify the reasoning or update the value with a comment explaining the design decision.
+
+---
+
+## Review #10 — Trigger Test: Stimulus Check Purpose
+
+![Trigger Test - Stimulus Check](./Review_10_Sanity.PNG)
+
+### Question
+
+What is the purpose of the **Stimulus Check** block in this section? Please add a comment on the block (or in the surrounding code) explaining what it validates and what happens if it fails.
+
+### Recommendation
+
+Move the **Stimulus Check** to run **before** the main acquisition/test logic. If the stimulus is invalid, the test should abort early rather than proceeding with a bad measurement.
+
+---
+
+## Review #11 — Overvoltage Test
+
+![Overvoltage Test](./Review_11_Over.PNG)
+
+### Question
+
+Why is the Overvoltage Test placed in the middle of the test sequence?
+
+### Recommendation
+
+Move the **Overvoltage Test to the beginning of the test sequence**. As a protection/safety check, it should run first before any other tests to ensure the DUT is safe to proceed with further testing.
