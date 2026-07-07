@@ -26,6 +26,9 @@ ship **only** with the MWCapture SDK (not on PyPI).
    (contains the `mwcapture` package and the DLL).
 4. Open `capture.py` and set `SDK_PYTHON_PATH` near the top to that folder's path.
 
+   Note: In this repository, `capture.py` is currently configured for:
+   `C:\Program Files\MWCaptureSDK 3.3.1.1556\SDKv3\Examples\Python\AVCapturePY`
+
 ## 3. Create a Python virtual environment
 
 From the repository root in PowerShell:
@@ -61,15 +64,25 @@ python -m pip install opencv-python numpy pywin32
 
 ```powershell
 cd "Work\Cancun\MW_Display_Test\Magewell Capture"
-python capture.py
+..\.venv\Scripts\python.exe capture.py
 ```
 
 Controls (preview window focused): `s` = snapshot (`.npy` + `.png`),
 `r` = toggle recording (`.mp4`), `q` = quit.
+
+Default output location is controlled by `OUTPUT_DIR` in `capture.py` and is
+currently set to:
+
+`d:\dev\Guy_Storage\Home\Magewell Capture\output`
+
+Change `OUTPUT_DIR` if you want snapshots/recordings written elsewhere.
 
 ## 6. Troubleshooting
 
 - **`could not import mwcapture`** — `SDK_PYTHON_PATH` wrong or SDK not installed (step 2).
 - **`ImportError: ... win32event`** — `pywin32` missing; re-run step 4.
 - **`No devices found`** — confirm device in Device Manager; reconnect and retry.
+- **`No locked input signal - connect a source and retry.`** — device is detected,
+  but no valid HDMI input is currently locked. Connect/start the source device,
+  then run again.
 - **Wrong Python bitness** — reinstall 64-bit Python to match the SDK DLL.

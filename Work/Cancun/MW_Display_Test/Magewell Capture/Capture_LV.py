@@ -69,7 +69,7 @@ _config = {
     "width": 0,        # 0 => follow input signal
     "height": 0,       # 0 => follow input signal
     "fps": 60,         # 0 => follow input signal
-    "output_dir": r"d:\dev\Guy_Storage\Home\Magewell Capture\output",
+    "output_dir": r"c:\Temp\capture_output",
     "record_codec": "mp4v",
     "record_extension": ".mp4",
 }
@@ -333,6 +333,9 @@ def initialize():
     Lazily adds the configured SDK path to ``sys.path`` / working directory and
     imports the bundled ``mwcapture`` package, then creates the SDK instance and
     refreshes the device list.
+
+    Accepts (and ignores) any extra positional arguments that LabVIEW's Python
+    Node may inject (e.g. a wired error-in cluster).
 
     Returns 0 on success, -1 on failure (see :func:`get_last_error`).
     """
