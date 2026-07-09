@@ -50,13 +50,14 @@ With the virtual environment active:
 
 ```powershell
 python -m pip install --upgrade pip
-python -m pip install opencv-python numpy pywin32
+python -m pip install opencv-python numpy scikit-image pywin32
 ```
 
 | Package         | Why it is needed                                  |
 | --------------- | ------------------------------------------------- |
 | `opencv-python` | Live preview window, recording, image snapshots   |
 | `numpy`         | Frame buffers and raw `.npy` snapshot export      |
+| `scikit-image`  | SSIM support for frame/image comparison workflows |
 | `pywin32`       | Required by the bundled `mwcapture` SDK package   |
 | `mwcapture`     | Bundled with the SDK (step 2), not installed here |
 
