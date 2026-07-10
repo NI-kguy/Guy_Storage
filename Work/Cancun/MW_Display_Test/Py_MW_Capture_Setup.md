@@ -12,6 +12,15 @@ Step-by-step guide to get `Magewell Capture/capture.py` running on Windows.
   ```
   The second command must print `64 bit`.
 - A **Magewell USB Capture** device connected, with a live HDMI source.
+- **LabVIEW 2023, 64-bit** — required for the LabVIEW-driven capture path
+  (`Magewell Capture/Capture_LV.py`), which calls Python via LabVIEW's Python
+  Node. Install via NI Package Manager and add the subcomponents:
+  - **NI-IMAQ**
+  - **NI-IMAQdx**
+  - **NI-IMAQ I/O**
+
+  The 64-bit LabVIEW must be paired with a 64-bit Python interpreter for the
+  Python Node.
 
 ## 2. Install the MWCapture SDK
 
