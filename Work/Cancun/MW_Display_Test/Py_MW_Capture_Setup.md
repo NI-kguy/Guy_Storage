@@ -6,15 +6,18 @@ Step-by-step guide to get `Magewell Capture/capture.py` running on Windows.
 
 - **Windows** (the script uses `pywin32` and the Magewell Windows DLL).
 - **Python 3.x, 64-bit** — must match the SDK's 64-bit DLL. Check with:
+
   ```powershell
   python --version
   python -c "import struct; print(struct.calcsize('P') * 8, 'bit')"
   ```
+
   The second command must print `64 bit`.
 - A **Magewell USB Capture** device connected, with a live HDMI source.
 - **LabVIEW 2023, 64-bit** — required for the LabVIEW-driven capture path
   (`Magewell Capture/Capture_LV.py`), which calls Python via LabVIEW's Python
   Node. Install via NI Package Manager and add the subcomponents:
+
   - **NI-IMAQ**
   - **NI-IMAQdx**
   - **NI-IMAQ I/O**
@@ -62,12 +65,12 @@ python -m pip install --upgrade pip
 python -m pip install opencv-python numpy scikit-image pywin32
 ```
 
-| Package         | Why it is needed                                  |
-| --------------- | ------------------------------------------------- |
+| Package           | Why it is needed                                  |
+| ----------------- | ------------------------------------------------- |
 | `opencv-python` | Live preview window, recording, image snapshots   |
-| `numpy`         | Frame buffers and raw `.npy` snapshot export      |
+| `numpy`         | Frame buffers and raw`.npy` snapshot export     |
 | `scikit-image`  | SSIM support for frame/image comparison workflows |
-| `pywin32`       | Required by the bundled `mwcapture` SDK package   |
+| `pywin32`       | Required by the bundled`mwcapture` SDK package  |
 | `mwcapture`     | Bundled with the SDK (step 2), not installed here |
 
 ## 5. Run the script
