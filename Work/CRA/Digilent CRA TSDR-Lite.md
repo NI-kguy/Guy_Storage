@@ -72,17 +72,13 @@
 
 **Product Family Description:**
 
-> *Provide only basic product information. Full product design detail is not required for CRA TSDR-Lite.*
-
 The Digilent MCC (Measurement Computing Corporation) product family consists of data acquisition (DAQ) and measurement devices offered in a range of connectivity options, including USB, Ethernet, and Wi-Fi. The family covers multifunction DAQ boards, analog and digital I/O modules, temperature and voltage measurement devices, and counter/timer products.
 
 These products serve test, measurement, and control applications across industrial, laboratory, and OEM environments. Depending on the connectivity option, they interface with a host either directly over USB or over a network connection.
 
-The CRA change primarily impacts the network-connected Ethernet modules, as these devices expose a network interface and therefore fall within the scope of the CRA cybersecurity requirements. USB-only devices are not affected by the network-facing requirements.
+CRA primarily impacts the network-connected Ethernet modules, as these devices expose a network interface and therefore fall within the scope of the CRA cybersecurity requirements. USB-only devices are not affected by the network-facing requirements.
 
 **Products impacted in this Family:**
-
-> *List product name(s) / model numbers in this family.*
 
 | Model Number      | Test Set   | Notes                                                           |
 | ----------------- | ---------- | --------------------------------------------------------------- |
@@ -94,8 +90,6 @@ The CRA change primarily impacts the network-connected Ethernet modules, as thes
 **Known Test Challenges:**
 
 - None
-
-> *If no new hardware is introduced, assembly drawings and layout slides are N/A.*
 
 ---
 
@@ -120,7 +114,7 @@ The CRA change primarily impacts the network-connected Ethernet modules, as thes
 | FVT140       | U2:`T:\Ultimate II\U2Products\MCC\Sequences\<product>.seq` | Program unique passcode to EEPROM |
 | RMA300       | U2:`T:\Ultimate II\U2Products\MCC\Sequences\<product>.seq` | RMA routing                       |
 
-> *`<product>` = E-1608, E-DIO24, E-TC, or E-TC-32*
+> *`<product>` = E-1608, E-DIO24, E-TC, or TC-32*
 
 **Additional Routing Steps Introduced by CRA:**
 
@@ -138,18 +132,20 @@ The CRA change primarily impacts the network-connected Ethernet modules, as thes
 
 ### Program Unique Passcode to EEPROM
 
+Digilent MCC Ethernet products provide a passcode that is stored in the EEPROM. The default value is currently "0". With CRA, a unique passcode will be generated based on the SN and programmed to the EEPROM during the FVT test.
+
 - What test steps update the shipping product firmware?
 
-  - FVT/RMA - Program Passcode to EEPROM
+  - FVT-140/RMA-300 - Program Passcode to EEPROM
 - How to program the unique passcode?
 
   - [X] Via Ethernet/USB.
 - Will changing the shipping product firmware change how the test functions?
 
-  - No firmware change, the function not going to changes.
+  - No firmware change, the product function will not change.
 - Is the update "drop-in" (no test sequence changes required)?
 
-  - No, need to add step to reset the passcode at the beginning of the seq and a step to program the passcode after all test  completed.
+  - No — need to add a step to reset the passcode at the beginning of the sequence, and a step to program the passcode after all tests complete.
 - Will changing the shipping product firmware require additional software/image changes (new driver, new FVT sequence, etc.)?
 
   - New driver - **TBD**
@@ -158,21 +154,21 @@ The CRA change primarily impacts the network-connected Ethernet modules, as thes
 ### Firmware Update and DUT Detection / Configuration
 
 * Is MAX / Hardware Manager / System Configuration / SysAPI used to test the product?
-  * Digilent MCC not using any of the tools listed.
+  * Digilent MCC does not use any of the tools listed.
 
 *Note: System Configuration's 2027 release is not Windows 7 compatible.*
 
 ### Program Unique Passcode Impact
 
-* For your product, how will Passcode need to program?
-  * FVT - 140, Program Passcode to EEPROM will be add in the seq after completed the test.
+* For your product, how will the passcode need to be programmed?
+  * FVT-140: the Program Passcode to EEPROM step will be added to the sequence after all the tests is completed.
 
-### Program Unique PasscodeRetest / RMA
+### Program Unique Passcode - Retest / RMA
 
 - Can the existing test handle RMA units with a passcode set?
   - No
 - What mechanism exists to force-clear any set password? (Wiping the firmware, etc.)
-  - Reset passcode step will added on the beginning of the test seq.
+  - A reset-passcode step will be added at the beginning of the test sequence.
 
 ### Late-Stage Firmware Update FVT Step
 
@@ -375,9 +371,7 @@ The CRA changes for this product family are not expected to change test times be
 
 ---
 
-## Slide 33 - Software [By Definition Exit] ❌
-
-> *Focus on CRA-driven software changes only.*
+## Slide 33 - Software [By Definition Exit] ✅
 
 - Station Image:  `<fill in>`
 - Station OS: `Windows 7 32-bit`
@@ -385,29 +379,29 @@ The CRA changes for this product family are not expected to change test times be
   - [ ] BlueNITE
   - [X] Ultimate II
   - [ ] Other
-- LabVIEW Version: `<fill in>`
-- TestStand Version: `<fill in>`
-- System Configuration Version: `<fill in>`
+- LabVIEW Version: `LabVIEW 2013`
+- TestStand Version: `Teststand 2010`
+- System Configuration Version: `14.0`
 
-Other products tested on the image NOT IMPACTED BY CRA:
+**Test Assets:**
 
-| Routing Step  | Test Suite or U2 Path | Notes |
-| ------------- | --------------------- | ----- |
-| `<fill in>` |                       |       |
-
----
-
-## Slide 34 - Software (Cont'd) [By Definition Exit] ❌
-
-- Station Callback update required?  `<fill in>`
-- Calibration requirements changed due to CRA firmware update?  `<fill in>`
-- MFG pain-points with the updated SW solution (collect feedback from MFG TE)
+| Product(s)       | Supported Product List | Test Set   | Test Procedure | Test Station             | Test Station Description                    |
+| ---------------- | ---------------------- | ---------- | -------------- | ------------------------ | ------------------------------------------- |
+| TC-32            | 539426A-02             | 539426A-01 | TP2576-FVT1    | 533486E-00 & 533486C-001 | STATION TYPE FOR CRIO MODULES AND WSN NODES |
+| E-TC             | 537653A-01             | 537653A-00 | TP2613-FVT1    | 533486E-00 & 533486C-001 | STATION TYPE FOR CRIO MODULES AND WSN NODES |
+| E-1608/E1608-OEM | 537650A-42             | 537650A-40 | TP2531-FVT1    | 533486E-00 & 533486C-001 | STATION TYPE FOR CRIO MODULES AND WSN NODES |
+| E-DIO24          | 537650A-52             | 537650A-50 | TP2586-FVT1    | 533486E-00 & 533486C-001 | STATION TYPE FOR CRIO MODULES AND WSN NODES |
 
 ---
 
-## Slide 35 - Knowledge / Best Practices Sharing [By Planning Exit] ❌
+## Slide 34 - Software (Cont'd) [By Definition Exit] ✅
 
-- Training needed for MFG/RMA technicians on CRA-related test changes
-- "Set on first use" process: ensure Debug tech, MFG Test, and RMA tech all understand the failure debug workflow (see Slide 20)
-- Special handling requirements introduced by CRA
-- Documentation to be handed off to MFG (links to runbooks, VIs, debug guides)
+- Station Callback update required?  **No**
+- Calibration requirements changed due to CRA firmware update?  **No**
+- MFG pain-points with the updated SW solution (collect feedback from MFG TE) **N/A**
+
+---
+
+## Slide 35 - Knowledge / Best Practices Sharing [By Planning Exit] ✅
+
+- No change on the FVT & RMA. However, TE can provide a session to teach MFG/RMA Engineer to reset the passcode.
