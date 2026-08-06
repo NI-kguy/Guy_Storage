@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table Tennis Round Robin Tournament</title>
+  <style>
+    /* ── Base ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #111;
+      background: #f5f5f5;
+      padding: 24px;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .page-header h1 {
+      font-size: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .page-header .subtitle {
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ── Section cards ── */
+    .section {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 16px 20px 20px;
+      margin-bottom: 24px;
+      page-break-inside: avoid;
+    }
+    .section h2 {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #222;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+    .section h3 {
+      font-size: 13px;
+      font-weight: bold;
+      margin: 14px 0 6px;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    /* ── Team list ── */
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin-bottom: 4px;
+    }
+    .team-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .team-item .seed-badge {
+      display: inline-block;
+      background: #222;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 3px;
+      min-width: 20px;
+      text-align: center;
+    }
+    .team-item input[type="text"] {
+      border: none;
+      border-bottom: 1.5px solid #888;
+      outline: none;
+      font-size: 13px;
+      width: 160px;
+      padding: 2px 4px;
+      background: transparent;
+      color: #111;
+    }
+    .team-item input[type="text"]:focus {
+      border-bottom-color: #0066cc;
+    }
+    .team-item input[type="text"]::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    /* ── Generic table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th {
+      background: #222;
+      color: #fff;
+      padding: 5px 8px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    .center { text-align: center; }
+
+    /* ── Score input cells ── */
+    .score-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .score-input {
+      border: none;
+      border-bottom: 1.5px solid #999;
+      width: 28px;
+      text-align: center;
+      font-size: 13px;
+      outline: none;
+      background: transparent;
+    }
+    .score-input:focus { border-bottom-color: #0066cc; }
+    .score-sep { font-weight: bold; color: #666; }
+
+    /* ── Standings table ── */
+    .standings-pos { font-weight: bold; }
+    .qualify-row td { background: #e6f4ea !important; }
+
+    /* ── Knockout bracket ── */
+    .bracket-grid {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr 40px 1fr;
+      gap: 0;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .bracket-match {
+      border: 2px solid #555;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .bracket-match .bm-team {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .bracket-match .bm-team:last-child { border-bottom: none; }
+    .bracket-match .bm-team input[type="text"] {
+      border: none;
+      border-bottom: 2px solid #aaa;
+      outline: none;
+      font-size: 15px;
+      width: 200px;
+      background: transparent;
+    }
+    .bracket-match .bm-team input[type="text"]:focus { border-bottom-color: #0066cc; }
+    .bracket-match .bm-team .score-input {
+      width: 40px;
+      font-size: 18px;
+      margin-left: auto;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .bracket-label {
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #777;
+      padding: 2px 0 5px;
+    }
+    .connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      position: relative;
+    }
+    .connector::before {
+      content: '';
+      border-top: 1.5px solid #999;
+      width: 100%;
+      position: absolute;
+    }
+    .connector-arrow {
+      font-size: 16px;
+      color: #666;
+      z-index: 1;
+    }
+
+    /* bracket rows */
+    .bracket-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .bracket-column {
+      flex: 1;
+    }
+
+    /* 3rd place */
+    .third-place-section {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed #bbb;
+    }
+
+    /* ── Save toolbar ── */
+    .save-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .save-bar .save-status {
+      font-size: 11px;
+      color: #2d7a3a;
+      font-style: italic;
+      min-width: 80px;
+    }
+    .save-bar button {
+      font-size: 12px;
+      padding: 5px 14px;
+      border: 1.5px solid #999;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      color: #333;
+    }
+    .save-bar button:hover { background: #f0f0f0; }
+    .save-bar .btn-export { border-color: #0066cc; color: #0066cc; }
+    .save-bar .btn-export:hover { background: #e8f0fe; }
+    .save-bar .btn-import { border-color: #555; color: #333; }
+    .save-bar .btn-import:hover { background: #f0f0f0; }
+    .save-bar .btn-clear { border-color: #c00; color: #c00; }
+    .save-bar .btn-clear:hover { background: #fff0f0; }
+
+    /* ── Print ── */
+    @media print {
+      body {
+        background: #fff;
+        padding: 10px;
+        font-size: 12px;
+      }
+      .section {
+        border: 1px solid #999;
+        border-radius: 0;
+        padding: 10px 14px 14px;
+        margin-bottom: 16px;
+        page-break-inside: avoid;
+      }
+      .no-print { display: none !important; }
+      input[type="text"] {
+        border-bottom-color: #333 !important;
+      }
+      .score-input { border-bottom-color: #333 !important; }
+      tr:nth-child(even) td { background: #f5f5f5 !important; }
+      .qualify-row td { background: #dff0d8 !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ PAGE HEADER -->
+<div class="page-header">
+  <h1>🏓 Table Tennis Tournament</h1>
+  <div class="subtitle">Round Robin — 2 Groups of 4 &nbsp;|&nbsp; Date: ___________________</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ SAVE BAR -->
+<div class="save-bar no-print">
+  <span class="save-status" id="saveStatus"></span>
+  <button onclick="exportData()" class="btn-export">&#x2B07; Export Data</button>
+  <label class="save-bar" style="margin:0;cursor:pointer;">
+    <button onclick="this.closest('label').querySelector('input').click()" class="btn-import">&#x2B06; Import Data</button>
+    <input type="file" accept=".json" style="display:none" onchange="importData(event)" />
+  </label>
+  <button onclick="clearAll()" class="btn-clear">&#x21BA; Clear All &amp; Reset</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ GROUP A -->
+<div class="section" id="groupA">
+  <h2>Group A</h2>
+
+  <!-- Team list -->
+  <h3>Teams</h3>
+  <div class="team-list">
+    <div class="team-item">
+      <span class="seed-badge">S1</span>
+      <input type="text" id="a1" placeholder="Seed 1 team name" oninput="refreshGroup('A')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">A2</span>
+      <input type="text" id="a2" placeholder="Team name" oninput="refreshGroup('A')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">A3</span>
+      <input type="text" id="a3" placeholder="Team name" oninput="refreshGroup('A')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">A4</span>
+      <input type="text" id="a4" placeholder="Team name" oninput="refreshGroup('A')" />
+    </div>
+  </div>
+
+  <!-- Match schedule -->
+  <h3>Match Schedule &nbsp;<small style="font-weight:normal;font-size:11px;color:#777;">(enter sets won, e.g. 3 – 1)</small></h3>
+  <table id="schedA">
+    <thead>
+      <tr>
+        <th style="width:36px">#</th>
+        <th>Home</th>
+        <th class="center" style="width:120px">Score</th>
+        <th>Away</th>
+        <th style="width:80px">Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Round 1 -->
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 1</td></tr>
+      <tr>
+        <td>A1</td>
+        <td id="aM1H">S1</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS1H" type="text" maxlength="2" oninput="calcWinner('a',1)"> <span class="score-sep">–</span> <input class="score-input" id="aS1A" type="text" maxlength="2" oninput="calcWinner('a',1)"></div></td>
+        <td id="aM1A">A4</td>
+        <td id="aW1"></td>
+      </tr>
+      <tr>
+        <td>A2</td>
+        <td id="aM2H">A2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS2H" type="text" maxlength="2" oninput="calcWinner('a',2)"> <span class="score-sep">–</span> <input class="score-input" id="aS2A" type="text" maxlength="2" oninput="calcWinner('a',2)"></div></td>
+        <td id="aM2A">A3</td>
+        <td id="aW2"></td>
+      </tr>
+      <!-- Round 2 -->
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 2</td></tr>
+      <tr>
+        <td>A3</td>
+        <td id="aM3H">S1</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS3H" type="text" maxlength="2" oninput="calcWinner('a',3)"> <span class="score-sep">–</span> <input class="score-input" id="aS3A" type="text" maxlength="2" oninput="calcWinner('a',3)"></div></td>
+        <td id="aM3A">A3</td>
+        <td id="aW3"></td>
+      </tr>
+      <tr>
+        <td>A4</td>
+        <td id="aM4H">A2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS4H" type="text" maxlength="2" oninput="calcWinner('a',4)"> <span class="score-sep">–</span> <input class="score-input" id="aS4A" type="text" maxlength="2" oninput="calcWinner('a',4)"></div></td>
+        <td id="aM4A">A4</td>
+        <td id="aW4"></td>
+      </tr>
+      <!-- Round 3 -->
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 3</td></tr>
+      <tr>
+        <td>A5</td>
+        <td id="aM5H">S1</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS5H" type="text" maxlength="2" oninput="calcWinner('a',5)"> <span class="score-sep">–</span> <input class="score-input" id="aS5A" type="text" maxlength="2" oninput="calcWinner('a',5)"></div></td>
+        <td id="aM5A">A2</td>
+        <td id="aW5"></td>
+      </tr>
+      <tr>
+        <td>A6</td>
+        <td id="aM6H">A3</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="aS6H" type="text" maxlength="2" oninput="calcWinner('a',6)"> <span class="score-sep">–</span> <input class="score-input" id="aS6A" type="text" maxlength="2" oninput="calcWinner('a',6)"></div></td>
+        <td id="aM6A">A4</td>
+        <td id="aW6"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Standings -->
+  <h3>Standings &nbsp;<small style="font-weight:normal;font-size:11px;color:#777;">(top 2 <span style="color:#2d7a3a">■</span> advance to playoffs)</small></h3>
+  <table id="standA">
+    <thead>
+      <tr>
+        <th style="width:32px">Pos</th>
+        <th>Team</th>
+        <th class="center" style="width:40px">P</th>
+        <th class="center" style="width:40px">W</th>
+        <th class="center" style="width:40px">L</th>
+        <th class="center" style="width:40px">Pts</th>
+      </tr>
+    </thead>
+    <tbody id="standABody">
+      <tr class="qualify-row"><td class="standings-pos">1</td><td id="aStand1">—</td><td class="center" id="aP1">0</td><td class="center" id="aW_1">0</td><td class="center" id="aL1">0</td><td class="center" id="aPts1">0</td></tr>
+      <tr class="qualify-row"><td class="standings-pos">2</td><td id="aStand2">—</td><td class="center" id="aP2">0</td><td class="center" id="aW_2">0</td><td class="center" id="aL2">0</td><td class="center" id="aPts2">0</td></tr>
+      <tr><td class="standings-pos">3</td><td id="aStand3">—</td><td class="center" id="aP3">0</td><td class="center" id="aW_3">0</td><td class="center" id="aL3">0</td><td class="center" id="aPts3">0</td></tr>
+      <tr><td class="standings-pos">4</td><td id="aStand4">—</td><td class="center" id="aP4">0</td><td class="center" id="aW_4">0</td><td class="center" id="aL4">0</td><td class="center" id="aPts4">0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ GROUP B -->
+<div class="section" id="groupB">
+  <h2>Group B</h2>
+
+  <h3>Teams</h3>
+  <div class="team-list">
+    <div class="team-item">
+      <span class="seed-badge">S2</span>
+      <input type="text" id="b1" placeholder="Seed 2 team name" oninput="refreshGroup('B')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">B2</span>
+      <input type="text" id="b2" placeholder="Team name" oninput="refreshGroup('B')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">B3</span>
+      <input type="text" id="b3" placeholder="Team name" oninput="refreshGroup('B')" />
+    </div>
+    <div class="team-item">
+      <span class="seed-badge">B4</span>
+      <input type="text" id="b4" placeholder="Team name" oninput="refreshGroup('B')" />
+    </div>
+  </div>
+
+  <h3>Match Schedule &nbsp;<small style="font-weight:normal;font-size:11px;color:#777;">(enter sets won, e.g. 3 – 1)</small></h3>
+  <table id="schedB">
+    <thead>
+      <tr>
+        <th style="width:36px">#</th>
+        <th>Home</th>
+        <th class="center" style="width:120px">Score</th>
+        <th>Away</th>
+        <th style="width:80px">Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 1</td></tr>
+      <tr>
+        <td>B1</td>
+        <td id="bM1H">S2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS1H" type="text" maxlength="2" oninput="calcWinner('b',1)"> <span class="score-sep">–</span> <input class="score-input" id="bS1A" type="text" maxlength="2" oninput="calcWinner('b',1)"></div></td>
+        <td id="bM1A">B4</td>
+        <td id="bW1"></td>
+      </tr>
+      <tr>
+        <td>B2</td>
+        <td id="bM2H">B2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS2H" type="text" maxlength="2" oninput="calcWinner('b',2)"> <span class="score-sep">–</span> <input class="score-input" id="bS2A" type="text" maxlength="2" oninput="calcWinner('b',2)"></div></td>
+        <td id="bM2A">B3</td>
+        <td id="bW2"></td>
+      </tr>
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 2</td></tr>
+      <tr>
+        <td>B3</td>
+        <td id="bM3H">S2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS3H" type="text" maxlength="2" oninput="calcWinner('b',3)"> <span class="score-sep">–</span> <input class="score-input" id="bS3A" type="text" maxlength="2" oninput="calcWinner('b',3)"></div></td>
+        <td id="bM3A">B3</td>
+        <td id="bW3"></td>
+      </tr>
+      <tr>
+        <td>B4</td>
+        <td id="bM4H">B2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS4H" type="text" maxlength="2" oninput="calcWinner('b',4)"> <span class="score-sep">–</span> <input class="score-input" id="bS4A" type="text" maxlength="2" oninput="calcWinner('b',4)"></div></td>
+        <td id="bM4A">B4</td>
+        <td id="bW4"></td>
+      </tr>
+      <tr><td colspan="5" style="background:#eee;font-weight:bold;font-size:11px;padding:3px 8px;">Round 3</td></tr>
+      <tr>
+        <td>B5</td>
+        <td id="bM5H">S2</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS5H" type="text" maxlength="2" oninput="calcWinner('b',5)"> <span class="score-sep">–</span> <input class="score-input" id="bS5A" type="text" maxlength="2" oninput="calcWinner('b',5)"></div></td>
+        <td id="bM5A">B2</td>
+        <td id="bW5"></td>
+      </tr>
+      <tr>
+        <td>B6</td>
+        <td id="bM6H">B3</td>
+        <td class="center"><div class="score-cell"><input class="score-input" id="bS6H" type="text" maxlength="2" oninput="calcWinner('b',6)"> <span class="score-sep">–</span> <input class="score-input" id="bS6A" type="text" maxlength="2" oninput="calcWinner('b',6)"></div></td>
+        <td id="bM6A">B4</td>
+        <td id="bW6"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Standings &nbsp;<small style="font-weight:normal;font-size:11px;color:#777;">(top 2 <span style="color:#2d7a3a">■</span> advance to playoffs)</small></h3>
+  <table id="standB">
+    <thead>
+      <tr>
+        <th style="width:32px">Pos</th>
+        <th>Team</th>
+        <th class="center" style="width:40px">P</th>
+        <th class="center" style="width:40px">W</th>
+        <th class="center" style="width:40px">L</th>
+        <th class="center" style="width:40px">Pts</th>
+      </tr>
+    </thead>
+    <tbody id="standBBody">
+      <tr class="qualify-row"><td class="standings-pos">1</td><td id="bStand1">—</td><td class="center" id="bP1">0</td><td class="center" id="bW_1">0</td><td class="center" id="bL1">0</td><td class="center" id="bPts1">0</td></tr>
+      <tr class="qualify-row"><td class="standings-pos">2</td><td id="bStand2">—</td><td class="center" id="bP2">0</td><td class="center" id="bW_2">0</td><td class="center" id="bL2">0</td><td class="center" id="bPts2">0</td></tr>
+      <tr><td class="standings-pos">3</td><td id="bStand3">—</td><td class="center" id="bP3">0</td><td class="center" id="bW_3">0</td><td class="center" id="bL3">0</td><td class="center" id="bPts3">0</td></tr>
+      <tr><td class="standings-pos">4</td><td id="bStand4">—</td><td class="center" id="bP4">0</td><td class="center" id="bW_4">0</td><td class="center" id="bL4">0</td><td class="center" id="bPts4">0</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ PLAYOFFS -->
+<div class="section" id="playoffs">
+  <h2>Playoffs</h2>
+  <p style="font-size:11px;color:#555;margin-bottom:14px;">Fill team names from standings after group stage is complete. Win = 2 pts, Loss = 0 pts.</p>
+
+  <!-- Semi-finals -->
+  <h3>Semi-Finals</h3>
+  <div style="display:flex;gap:28px;flex-wrap:wrap;">
+    <!-- SF1 -->
+    <div style="flex:1;min-width:320px;">
+      <div class="bracket-label" style="margin-bottom:8px;">Semi-Final 1</div>
+      <div class="bracket-match">
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">1st Group A</span>
+          <input type="text" id="sf1T1" placeholder="Team name" />
+          <input class="score-input" id="sf1S1" type="text" maxlength="2" oninput="calcSFWinner(1)" />
+        </div>
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">2nd Group B</span>
+          <input type="text" id="sf1T2" placeholder="Team name" />
+          <input class="score-input" id="sf1S2" type="text" maxlength="2" oninput="calcSFWinner(1)" />
+        </div>
+      </div>
+      <div style="font-size:12px;margin-top:8px;color:#555;">Winner → Final &nbsp;|&nbsp; Loser → 3rd Place</div>
+      <div style="font-size:14px;margin-top:5px;font-weight:bold;" id="sf1Result"></div>
+    </div>
+    <!-- SF2 -->
+    <div style="flex:1;min-width:320px;">
+      <div class="bracket-label" style="margin-bottom:8px;">Semi-Final 2</div>
+      <div class="bracket-match">
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">1st Group B</span>
+          <input type="text" id="sf2T1" placeholder="Team name" />
+          <input class="score-input" id="sf2S1" type="text" maxlength="2" oninput="calcSFWinner(2)" />
+        </div>
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">2nd Group A</span>
+          <input type="text" id="sf2T2" placeholder="Team name" />
+          <input class="score-input" id="sf2S2" type="text" maxlength="2" oninput="calcSFWinner(2)" />
+        </div>
+      </div>
+      <div style="font-size:12px;margin-top:8px;color:#555;">Winner → Final &nbsp;|&nbsp; Loser → 3rd Place</div>
+      <div style="font-size:14px;margin-top:5px;font-weight:bold;" id="sf2Result"></div>
+    </div>
+  </div>
+
+  <!-- 3rd place + Final -->
+  <div style="display:flex;flex-direction:column;gap:28px;margin-top:28px;">
+    <!-- 3rd Place -->
+    <div style="flex:1;min-width:320px;">
+      <div class="bracket-label" style="margin-bottom:8px;">3rd Place Match</div>
+      <div class="bracket-match">
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">Loser SF1</span>
+          <input type="text" id="tp1T1" placeholder="Team name" />
+          <input class="score-input" id="tp1S1" type="text" maxlength="2" oninput="calcTPWinner()" />
+        </div>
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">Loser SF2</span>
+          <input type="text" id="tp1T2" placeholder="Team name" />
+          <input class="score-input" id="tp1S2" type="text" maxlength="2" oninput="calcTPWinner()" />
+        </div>
+      </div>
+      <div style="font-size:14px;margin-top:6px;font-weight:bold;" id="tpResult"></div>
+    </div>
+    <!-- Final -->
+    <div style="flex:1;min-width:320px;">
+      <div class="bracket-label" style="font-size:17px;color:#c00;margin-bottom:8px;">🏆 Final</div>
+      <div class="bracket-match" style="border-color:#c00;border-width:3px;">
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">Winner SF1</span>
+          <input type="text" id="finT1" placeholder="Team name" />
+          <input class="score-input" id="finS1" type="text" maxlength="2" oninput="calcFinalWinner()" />
+        </div>
+        <div class="bm-team">
+          <span style="font-size:12px;color:#888;width:110px;flex-shrink:0;">Winner SF2</span>
+          <input type="text" id="finT2" placeholder="Team name" />
+          <input class="score-input" id="finS2" type="text" maxlength="2" oninput="calcFinalWinner()" />
+        </div>
+      </div>
+      <div style="font-size:18px;margin-top:8px;font-weight:bold;color:#c00;" id="finalResult"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ SCRIPT -->
+<script>
+  // ── Match definitions per group (home index, away index — 0-based into group teams)
+  const MATCHES = [
+    [0, 3], // Round 1: T1 vs T4
+    [1, 2], // Round 1: T2 vs T3
+    [0, 2], // Round 2: T1 vs T3
+    [1, 3], // Round 2: T2 vs T4
+    [0, 1], // Round 3: T1 vs T2
+    [2, 3], // Round 3: T3 vs T4
+  ];
+
+  function getTeams(grp) {
+    const g = grp.toLowerCase();
+    return [1,2,3,4].map(i => document.getElementById(g+i).value.trim() || (grp+''+i === 'a1' ? 'S1' : grp+''+i === 'b1' ? 'S2' : grp.toUpperCase()+i));
+  }
+
+  function refreshGroup(grp) {
+    const g = grp.toLowerCase();
+    const teams = getTeams(grp);
+    MATCHES.forEach((m, idx) => {
+      const n = idx + 1;
+      document.getElementById(g+'M'+n+'H').textContent = teams[m[0]];
+      document.getElementById(g+'M'+n+'A').textContent = teams[m[1]];
+      calcWinner(g, n);
+    });
+    updateStandings(grp);
+  }
+
+  function calcWinner(g, n) {
+    const h = parseInt(document.getElementById(g+'S'+n+'H').value);
+    const a = parseInt(document.getElementById(g+'S'+n+'A').value);
+    const wEl = document.getElementById(g+'W'+n);
+    if (!isNaN(h) && !isNaN(a) && (h !== a)) {
+      const homeTeam = document.getElementById(g+'M'+n+'H').textContent;
+      const awayTeam = document.getElementById(g+'M'+n+'A').textContent;
+      wEl.textContent = h > a ? homeTeam : awayTeam;
+      wEl.style.fontWeight = 'bold';
+    } else {
+      wEl.textContent = '';
+    }
+    updateStandings(g.toUpperCase());
+  }
+
+  function updateStandings(grp) {
+    const g = grp.toLowerCase();
+    const teams = getTeams(grp);
+    const stats = teams.map(t => ({ name: t, p: 0, w: 0, l: 0, pts: 0 }));
+
+    MATCHES.forEach((m, idx) => {
+      const n = idx + 1;
+      const h = parseInt(document.getElementById(g+'S'+n+'H').value);
+      const a = parseInt(document.getElementById(g+'S'+n+'A').value);
+      if (!isNaN(h) && !isNaN(a) && h !== a) {
+        stats[m[0]].p++; stats[m[1]].p++;
+        if (h > a) { stats[m[0]].w++; stats[m[0]].pts += 2; stats[m[1]].l++; }
+        else       { stats[m[1]].w++; stats[m[1]].pts += 2; stats[m[0]].l++; }
+      }
+    });
+
+    stats.sort((a, b) => b.pts - a.pts || b.w - a.w);
+
+    stats.forEach((s, i) => {
+      const pos = i + 1;
+      document.getElementById(g+'Stand'+pos).textContent = s.name;
+      document.getElementById(g+'P'+pos).textContent = s.p;
+      document.getElementById(g+'W_'+pos).textContent = s.w;
+      document.getElementById(g+'L'+pos).textContent = s.l;
+      document.getElementById(g+'Pts'+pos).textContent = s.pts;
+    });
+  }
+
+  function calcSFWinner(sf) {
+    const t1 = document.getElementById('sf'+sf+'T1').value || 'Team 1';
+    const t2 = document.getElementById('sf'+sf+'T2').value || 'Team 2';
+    const s1 = parseInt(document.getElementById('sf'+sf+'S1').value);
+    const s2 = parseInt(document.getElementById('sf'+sf+'S2').value);
+    const el = document.getElementById('sf'+sf+'Result');
+    if (!isNaN(s1) && !isNaN(s2) && s1 !== s2) {
+      el.textContent = '✓ Winner: ' + (s1 > s2 ? t1 : t2);
+    } else { el.textContent = ''; }
+  }
+
+  function calcTPWinner() {
+    const t1 = document.getElementById('tp1T1').value || 'Team 1';
+    const t2 = document.getElementById('tp1T2').value || 'Team 2';
+    const s1 = parseInt(document.getElementById('tp1S1').value);
+    const s2 = parseInt(document.getElementById('tp1S2').value);
+    const el = document.getElementById('tpResult');
+    if (!isNaN(s1) && !isNaN(s2) && s1 !== s2) {
+      el.textContent = '🥉 3rd Place: ' + (s1 > s2 ? t1 : t2);
+    } else { el.textContent = ''; }
+  }
+
+  function calcFinalWinner() {
+    const t1 = document.getElementById('finT1').value || 'Team 1';
+    const t2 = document.getElementById('finT2').value || 'Team 2';
+    const s1 = parseInt(document.getElementById('finS1').value);
+    const s2 = parseInt(document.getElementById('finS2').value);
+    const el = document.getElementById('finalResult');
+    if (!isNaN(s1) && !isNaN(s2) && s1 !== s2) {
+      el.textContent = '🏆 Champion: ' + (s1 > s2 ? t1 : t2);
+    } else { el.textContent = ''; }
+  }
+
+  // ── Server sync (replaces localStorage) ───────────────────────────
+  // Detects whether the page is served from the Flask server or opened
+  // directly as a file. If served from Flask, all reads/writes go to
+  // the API. If opened as a plain file, falls back to localStorage so
+  // the page still works offline.
+  const USE_SERVER = (location.protocol !== 'file:');
+  const SAVE_KEY   = 'tt_tournament_data';   // fallback localStorage key
+  let saveTimer    = null;
+  let pollTimer    = null;
+  let lastPollHash = '';   // detect remote changes without overwriting local edits
+
+  // ── Helpers ──────────────────────────────────────────────────────
+  function collectData() {
+    const data = {};
+    document.querySelectorAll('input[type="text"]').forEach(el => {
+      if (el.id) data[el.id] = el.value;
+    });
+    return data;
+  }
+
+  function applyData(data) {
+    // Only update fields that are NOT currently focused (don't stomp on typing)
+    const focused = document.activeElement;
+    Object.entries(data).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el && el !== focused) el.value = val;
+    });
+    refreshGroup('A'); refreshGroup('B');
+    calcSFWinner(1); calcSFWinner(2); calcTPWinner(); calcFinalWinner();
+  }
+
+  function setStatus(msg, duration) {
+    const s = document.getElementById('saveStatus');
+    s.textContent = msg;
+    clearTimeout(saveTimer);
+    if (duration) saveTimer = setTimeout(() => { s.textContent = ''; }, duration);
+  }
+
+  // ── Save ─────────────────────────────────────────────────────────
+  function saveData() {
+    const data = collectData();
+    if (USE_SERVER) {
+      setStatus('\u21bb Saving\u2026');
+      fetch('/api/data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.ok ? setStatus('\u2713 Saved', 2000) : setStatus('\u26a0 Save failed', 3000))
+      .catch(() => setStatus('\u26a0 Server unreachable', 3000));
+    } else {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      setStatus('\u2713 Auto-saved (offline)', 2000);
+    }
+  }
+
+  // ── Load ─────────────────────────────────────────────────────────
+  function loadData() {
+    if (USE_SERVER) {
+      fetch('/api/data')
+        .then(r => r.json())
+        .then(data => { applyData(data); startPolling(); })
+        .catch(() => setStatus('\u26a0 Could not load from server', 4000));
+    } else {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return;
+      try { applyData(JSON.parse(raw)); } catch(e) {}
+    }
+  }
+
+  // ── Polling — sync changes from other devices every 3 s ──────────
+  function startPolling() {
+    if (!USE_SERVER) return;
+    pollTimer = setInterval(() => {
+      fetch('/api/data')
+        .then(r => r.json())
+        .then(data => {
+          const hash = JSON.stringify(data);
+          if (hash !== lastPollHash) {
+            lastPollHash = hash;
+            applyData(data);
+          }
+        })
+        .catch(() => {}); // silently ignore network blips
+    }, 3000);
+  }
+
+  // ── Clear ────────────────────────────────────────────────────────
+  function clearAll() {
+    if (!confirm('Clear all team names and scores? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="text"]').forEach(el => { el.value = ''; });
+    refreshGroup('A'); refreshGroup('B');
+    calcSFWinner(1); calcSFWinner(2); calcTPWinner(); calcFinalWinner();
+    if (USE_SERVER) {
+      fetch('/api/clear', { method: 'POST' })
+        .then(() => setStatus('Cleared', 2000))
+        .catch(() => setStatus('\u26a0 Server unreachable', 3000));
+    } else {
+      localStorage.removeItem(SAVE_KEY);
+      setStatus('Cleared', 2000);
+    }
+  }
+
+  // ── Export (backup to file) ───────────────────────────────────────
+  function exportData() {
+    const data = collectData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tt_tournament_data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    setStatus('\u2713 Exported', 2000);
+  }
+
+  // ── Import (restore from file) ────────────────────────────────────
+  function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      let data;
+      try { data = JSON.parse(e.target.result); } catch(err) {
+        alert('Invalid file. Please select a valid tournament data file (.json).');
+        return;
+      }
+      applyData(data);
+      if (USE_SERVER) {
+        fetch('/api/data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(() => setStatus('\u2713 Imported & synced', 2000))
+          .catch(() => setStatus('\u26a0 Imported (sync failed)', 3000));
+      } else {
+        localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+        setStatus('\u2713 Imported', 2000);
+      }
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  }
+
+  // ── Debounced auto-save on every input ────────────────────────────
+  let debounceTimer = null;
+  document.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(saveData, 500);
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────
+  loadData();
+  refreshGroup('A');
+  refreshGroup('B');
+  calcSFWinner(1); calcSFWinner(2); calcTPWinner(); calcFinalWinner();
+</script>
+
+</body>
+</html>
