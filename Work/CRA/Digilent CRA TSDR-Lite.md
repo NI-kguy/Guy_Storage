@@ -118,9 +118,7 @@ CRA primarily impacts the network-connected Ethernet modules, as these devices e
 
 **Additional Routing Steps Introduced by CRA:**
 
-| Routing Step       | Test Suite or U2 Path | Notes                            |
-| ------------------ | --------------------- | -------------------------------- |
-| **~~TBD~~** | None                  | Add passcode label to the module |
+None.
 
 ---
 
@@ -132,11 +130,13 @@ CRA primarily impacts the network-connected Ethernet modules, as these devices e
 
 ### Program Unique Passcode to EEPROM
 
-Digilent MCC Ethernet products provide a passcode that is stored in the EEPROM. The default value is currently "0". With CRA, a unique passcode will be generated based on the SN and programmed to the EEPROM during the FVT test.
+Digilent MCC Ethernet products provide a passcode that is stored in the EEPROM. The default value is currently "0" (all-zero). With CRA, each device will be configured with a unique internal password during the FVT test, ensuring that no unit is shipped with the default all-zero password.
 
-- What test steps update the shipping product firmware?
+Customers will not be provided with an initial password. Instead, upon first use, they will be instructed to use the reset button on the rear of the device to reset the credentials and establish their own password. This solution leverages existing product functionality, provides a simple and intuitive customer experience, and avoids the need for more complex manufacturing processes while maintaining a secure out-of-box configuration.
 
-  - FVT-140/RMA-300 - Program Passcode to EEPROM
+- What test steps to program the inique passcode?
+
+  - FVT-140/RMA-300 - Program a unique internal password to EEPROM
 - How to program the unique passcode?
 
   - [X] Via Ethernet/USB.
@@ -148,7 +148,7 @@ Digilent MCC Ethernet products provide a passcode that is stored in the EEPROM. 
   - No — need to add a step to reset the passcode at the beginning of the sequence, and a step to program the passcode after all tests complete.
 - Will changing the shipping product firmware require additional software/image changes (new driver, new FVT sequence, etc.)?
 
-  - New driver - **TBD**
+  - New driver - **No**
   - New FVT Sequence - **No**
 
 ### Firmware Update and DUT Detection / Configuration
@@ -166,7 +166,7 @@ Digilent MCC Ethernet products provide a passcode that is stored in the EEPROM. 
 ### Program Unique Passcode - Retest / RMA
 
 - Can the existing test handle RMA units with a passcode set?
-  - No
+  - Yes, but operator need to press reset button manually.
 - What mechanism exists to force-clear any set password? (Wiping the firmware, etc.)
   - A reset-passcode step will be added at the beginning of the test sequence.
 
@@ -208,17 +208,17 @@ N/A - Not needed.
 
 ---
 
-## Slide 13 - RMA Support / MFG Services [By Planning Exit] ❌
+## Slide 13 - RMA Support / MFG Services [By Planning Exit] ✅
 
 - Can pre-CRA units be RMA'd on the updated test station? (backwards compatibility)
 
   - Yes, Reset Passcode step can also apply to pre-CRA units and program unique passcode to be run as well.
 - Special RMA instructions related to CRA (e.g., password/credential handling on returned units)
 
-  - relabel the passcode to the module.
+  - No.
 - RMA capability at satellite sites - upgrade plan required?
 
-  - RMA capability at satellite sites (including CSC) is not impacted. Sites that already have the hardware to handle these products can continue to do so.
+  - No upgrade required.
 
 ---
 
