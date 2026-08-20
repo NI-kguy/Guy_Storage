@@ -339,9 +339,9 @@ Standard CRA TSDR-Lite invitees (Definition):
 | R&D Test Engineer / CRA R&D TE Tech Lead    | Phillip Conrad      |
 | Global Director of Mfg Test Engineering     | Rasheel Karmacharya |
 | Mfg Test Technical Lead                     | Seth Berry          |
-| Mfg Test Engineer                           |                     |
-| HW Project/Program Manager                  |                     |
-| Mfg Product Engineer (per site, NIH or PEN) |                     |
+| Mfg Test Engineer                           | Csorvasi, Sandor    |
+| HW Project/Program Manager                  | Kovacs, Benc        |
+| Mfg Product Engineer (per site, NIH or PEN) | Abuczki, Matyas     |
 
 Standard CRA TSDR-Lite invitees (Planning):
 
@@ -350,12 +350,12 @@ Standard CRA TSDR-Lite invitees (Planning):
 | R&D Test Engineer / CRA R&D TE Tech Lead           | Phillip Conrad      |
 | Global Director of Mfg Test Engineering            | Rasheel Karmacharya |
 | Mfg Test Technical Lead                            | Seth Berry          |
-| Mfg Test Engineer                                  |                     |
-| Mfg Test Engineer's Manager (per site, NIH or PEN) |                     |
+| Mfg Test Engineer                                  | Csorvasi, Sandor    |
+| Mfg Test Engineer's Manager (per site, NIH or PEN) | Kovacs, Benc        |
 | Mfg Liaison                                        | Tameem Khan (PEN)   |
-| HW Services rep (for RMA/Cal impact discussion)    |                     |
-| HW Project/Program Manager                         |                     |
-| Mfg Product Engineer (per site, NIH or PEN)        |                     |
+| HW Services rep (for RMA/Cal impact discussion)    | N/A                 |
+| HW Project/Program Manager                         | Francis, Danya      |
+| Mfg Product Engineer (per site, NIH or PEN)        | Abuczki, Matyas     |
 
 ---
 
